@@ -28,6 +28,7 @@ html, body {
   min-height: 100%;
   scroll-behavior: smooth;
 }
+  
 
 body {
   background: var(--bg);
@@ -257,7 +258,7 @@ section p {
 
 /* hover 动效保留 */
 #works .overlap-img:hover {
-  transform: translateY(-8px) rotate(-1.5deg);
+  transform: translateY(8px) rotate(1.5deg);
   box-shadow: 0 20px 40px rgba(0,0,0,0.22);
 }
 
@@ -285,6 +286,94 @@ section p {
   #works .artu-right,
   #works .artu-left {
     flex-direction: column;
+  }
+}
+/* ========== Where I've Contributed style ========== */
+
+.experience-wrapper {
+  display: flex;
+  gap: 60px;
+  margin-top: 50px;
+}
+
+.experience-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 200px;
+}
+
+.experience-tabs li {
+  padding: 10px 0;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  padding-left: 12px;
+  transition: all 0.2s ease;
+}
+
+.experience-tabs li:hover {
+  color: var(--accent);
+}
+
+.experience-tabs li.active {
+  color: var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+.experience-content {
+  flex: 1;
+}
+
+.exp-panel {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.exp-panel.active {
+  display: block;
+}
+
+.exp-panel h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.exp-panel ul {
+  padding-left: 18px;
+}
+
+.exp-panel li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 手机屏幕改为上下布局 */
+@media (max-width: 800px) {
+  .experience-wrapper {
+    flex-direction: column;
+  }
+
+  .experience-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .experience-tabs li {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    padding-left: 0;
+    padding-bottom: 6px;
+  }
+
+  .experience-tabs li.active {
+    border-bottom: 2px solid var(--accent);
   }
 }
 
@@ -418,25 +507,100 @@ section p {
 
 
 
-    <!-- PROJECTS -->
-    <section id="projects" class="reveal">
-      <h2>Projects</h2>
-      <div class="cn">活动策划</div>
+<section id="projects" class="reveal">
 
-      <p><strong>Hanfu Model Contest</strong></p>
-      <p class="muted">
-        参与汉服模特大赛的整体筹备，负责宣传文案撰写与活动规划，
-        包括会场设计与素材收集。致力于通过视听结合向观众展示中华传统服饰与文化之美。
-      </p>
+  <h2>Where I’ve Contributed</h2>
+  <div class="cn">活动策划 · Event Planning & Community Work</div>
 
-      <br/>
+  <div class="experience-wrapper">
 
-      <p><strong>Tang-Style Hanfu Banquet</strong></p>
-      <p class="muted">
-        社团迎新活动「唐风裙幄宴」的策划人之一，参与活动方案制定、
-        时间轴规划与现场执行。 
-      </p>
-    </section>
+    <!-- 左边：活动列表 -->
+    <ul class="experience-tabs">
+      <li class="active" data-tab="hanfu-model">Hanfu Model Contest</li>
+      <li data-tab="tang-banquet">Tang Style Banquet</li>
+      <li data-tab="hanfu-society">Melbourne Hanfu Society</li>
+      <li data-tab="eic">EIC Education (Internship)</li>
+    </ul>
+
+    <!-- 右边：内容区 -->
+    <div class="experience-content">
+
+      <!-- ① 汉服模特大赛 -->
+      <div class="exp-panel active" id="hanfu-model">
+        <h3>Hanfu Model Contest</h3>
+        <p class="muted">Role: Promotion & Music Design</p>
+
+        <p class="cn">
+          在汉服走秀比赛中，我参与活动宣传文案撰写，并负责音乐部分的整体策划与执行，
+          包括赛前音乐素材收集、场景音效设计及现场播放控制等。
+          活动致力于通过视听结合向观众展示中华传统服饰与文化之美。
+        </p>
+
+        <ul>
+          <li>Wrote promotional copy for the event</li>
+          <li>Designed sound effects for stage transitions</li>
+          <li>Managed live music transitions during the show</li>
+          <li>Enhanced cultural atmosphere through audio-visual curation</li>
+        </ul>
+      </div>
+
+      <!-- ② 唐风裙幄宴 -->
+      <div class="exp-panel" id="tang-banquet">
+        <h3>Tang Style Banquet</h3>
+        <p class="muted">Role: Core Organising Member</p>
+
+        <p class="cn">
+          我曾作为核心成员参与“唐风裙幄宴”活动的策划与执行，该活动同时作为社团迎新会举办。
+          与团队协作制定活动方案与时间表，提出创意建议，确保活动流程顺畅。
+        </p>
+
+        <ul>
+          <li>Co-developed event proposal and timeline</li>
+          <li>Assisted in logistics and on-site coordination</li>
+          <li>Contributed creative ideas to enhance the theme</li>
+        </ul>
+      </div>
+
+      <!-- ③ 墨尔本汉服社 -->
+      <div class="exp-panel" id="hanfu-society">
+        <h3>Melbourne Hanfu Society</h3>
+        <p class="muted">Role: Social Media Management</p>
+
+        <p class="cn">
+          负责管理和更新墨尔本汉服社在小红书平台的账号，
+          定期发布社团活动通知、现场照片和短视频。
+        </p>
+
+        <ul>
+          <li>Managed official Xiaohongshu account for the society</li>
+          <li>Posted event updates, photos and short videos</li>
+          <li>Expanded online exposure and engagement</li>
+        </ul>
+      </div>
+
+      <!-- ④ 启德 -->
+      <div class="exp-panel" id="eic">
+        <h3>EIC Education</h3>
+        <p class="muted">Role: Content & WeChat Mini Program Assistant</p>
+
+        <p class="cn">
+          在启德教育实习期间，我负责编辑三篇微信公众号文章内容，
+          并参与多个活动宣传小程序的编辑与发布。
+        </p>
+
+        <ul>
+          <li>Edited 3 WeChat Official Account articles</li>
+          <li>Assisted with mini program content updates</li>
+          <li>Supported promotional campaigns and initiatives</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
 
     <!-- MEDIA -->
     <section id="media" class="reveal">
@@ -497,6 +661,21 @@ section p {
 
   document.querySelectorAll('.reveal').forEach(el => {
     observer.observe(el);
+  });
+</script>
+  
+<script>
+  const tabs = document.querySelectorAll(".experience-tabs li");
+  const panels = document.querySelectorAll(".exp-panel");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      panels.forEach(p => p.classList.remove("active"));
+
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
   });
 </script>
 

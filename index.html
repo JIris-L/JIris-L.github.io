@@ -180,33 +180,64 @@ section p {
   transform: translateY(0);
 }
 
-/* ------- 图片像书签，被下面文字压住一部分 ------- */
-.bookmark-stack {
-  margin-top: 32px;
+/* ========== 字在左，图在右，被压住的书签效果 ========== */
+
+.overlap-item {
   position: relative;
+  min-height: 260px;
+  margin: 60px 0;
 }
 
-/* 上面的细长图片书签 */
-.bookmark-stack-img {
+/* 左边文字块 */
+.overlap-text {
+  max-width: 65%;
+  position: relative;
+  z-index: 2; /* 在上面 */
+}
+
+/* 右边图像书签 */
+.overlap-img-wrap {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 1; /* 在文字后面 */
+}
+
+/* 图片本体 */
+.overlap-img {
   display: block;
-  margin: 0 auto;
-  max-height: 260px;      /* 决定“书签”的长度，可以自己调 */
+  max-height: 280px;
   width: auto;
   border-radius: 4px 4px 10px 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
-  filter: brightness(0.96);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+  transition: transform .35s ease, box-shadow .35s ease;
 }
 
-/* 下面的文字卡片，压住图片的一部分 */
-.bookmark-stack-card {
-  position: relative;
-  max-width: 520px;
-  margin: -80px auto 0;   /* 这里的 -80px 决定“压住”的高度，可以调 */
-  padding: 16px 20px;
-  background: rgba(244, 241, 236, 0.94); /* 带一点透明感 */
-  backdrop-filter: blur(3px);
-  border-radius: 10px;
+/* 鼠标移动的动效（你说要保留的） */
+.overlap-img:hover {
+  transform: translateY(-8px) rotate(-1.5deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.22);
 }
+
+/* 手机上就上下排列，避免挤一起 */
+@media (max-width: 800px) {
+  .overlap-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .overlap-text {
+    max-width: 100%;
+  }
+
+  .overlap-img-wrap {
+    position: relative;
+    margin-top: 30px;
+    right: auto;
+    top: 0;
+  }
+}
+
 
   </style>
 </head>
@@ -266,39 +297,28 @@ section p {
   <h2>Some Things I’ve Written</h2>
   <div class="cn">多文体创作 · Works</div>
 
-<section id="works" class="reveal">
-  <h2>Some Things I’ve Written</h2>
-  <div class="cn">多文体创作 · Works</div>
+<div class="overlap-item">
 
-<section id="works" class="reveal">
-  <h2>Some Things I’ve Written</h2>
-  <div class="cn">多文体创作 · Works</div>
+  <!-- 左边的文字 -->
+  <div class="overlap-text">
+    <p><strong>The Artu Estate</strong></p>
+    <p class="muted">
+      A fanfiction of Sultan’s Game · Narrative · Worldbuilding
+    </p>
+    <p class="muted">
+      《苏丹的游戏》同人创作，在宅邸、王位与未尽之言间展开
+    </p>
+    <p style="font-size:12px; color:#aaa;">
+      #fanfiction #narrative #worldbuilding
+    </p>
+  </div>
 
-<section id="works" class="reveal">
-  <h2>Some Things I’ve Written</h2>
-  <div class="cn">多文体创作 · Works</div>
+  <!-- 右边的图片书签 -->
+  <div class="overlap-img-wrap">
+    <img src="/mnt/data/restw.jpg">
 
-  <!-- 阿尔图宅邸 + 书签图 + 覆盖文字 -->
-  <div class="bookmark-stack">
+</div>
 
-    <!-- 1. 上面的细长图片书签 -->
-    <img src="images/restw.jpg"
-         alt="Artu Estate"
-         class="bookmark-stack-img">
-
-    <!-- 2. 压住一部分图片的文字卡片 -->
-    <div class="bookmark-stack-card">
-      <p><strong>The Artu Estate</strong></p>
-      <p class="muted">
-        A fanfiction of Sultan’s Game · Narrative · Worldbuilding
-      </p>
-      <p class="muted">
-        《苏丹的游戏》同人创作，在宅邸、王位与未尽之言间展开。
-      </p>
-      <p style="font-size:12px; color:#aaa;">
-        #fanfiction #narrative #worldbuilding
-      </p>
-    </div>
 
 
   <!-- 项目 2 -->

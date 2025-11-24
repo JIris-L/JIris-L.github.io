@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jing Jin · Personal Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #f7f2ec;        /* 背景：米白旧纸感 */
+      --card: #fffaf4;      /* 卡片：更亮一点 */
+      --accent: #c28e6a;    /* 点缀色：温柔棕橙 */
+      --text-main: #333333;
+      --text-muted: #777777;
+      --border: #e2d4c6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 12px;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      background-color: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+      padding: 32px 28px 40px;
+      border: 1px solid var(--border);
+    }
+
+    @media (min-width: 900px) {
+      .page {
+        padding: 40px 52px 48px;
+      }
+    }
+
+    /* 顶部 Header */
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 780px) {
+      .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    .identity {
+      max-width: 560px;
+    }
+
+    .name-en {
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .name-cn {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .title-line {
+      margin-top: 10px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .tagline-cn {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contact-block {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    @media (min-width: 780px) {
+      .contact-block {
+        text-align: right;
+      }
+    }
+
+    .contact-block a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(194, 142, 106, 0.3);
+    }
+
+    .contact-block a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* 主体布局：左侧简介 + 右侧详细 */
+
+    .main-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (min-width: 900px) {
+      .main-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 32px;
+      }
+    }
+
+    .sidebar {
+      flex: 0 0 30%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        padding-right: 24px;
+        margin-bottom: 0;
+      }
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* 通用小标题 */
+
+    .section-heading {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .section-heading-cn {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 0 6px 6px 0;
+      background-color: #fffdf8;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* 侧边栏内容 */
+
+    .sidebar-block {
+      font-size: 13px;
+    }
+
+    .sidebar-block p + p {
+      margin-top: 6px;
+    }
+
+    /* 右侧 section */
+
+    .block {
+      padding: 14px 0 6px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .block:last-child {
+      border-bottom: none;
+    }
+
+    .block-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .block-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .block-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .block-body {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .block-body p + p {
+      margin-top: 4px;
+    }
+
+    .badge-row {
+      margin-top: 6px;
+    }
+
+    /* 底部 footer */
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 11px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- 顶部 Header：名字 + 简短介绍 -->
+    <header class="header">
+      <div class="identity">
+        <div class="name-en">JING JIN</div>
+        <div class="name-cn">金静（JIris）</div>
+
+        <div class="title-line">WRITER · CREATOR · COMMUNITY ORGANISER</div>
+
+        <p class="tagline">
+          I collect moments, fragments, and half-finished sentences, and try to give
+          them a place to belong.
+        </p>
+        <p class="tagline-cn">
+          我收集瞬间、碎片与未完成的句子，试着为它们找到一个可以安放的地方。
+        </p>
+      </div>
+
+      <div class="contact-block">
+        <!-- 这里的内容你可以之后替换成自己的方式 -->
+        <div>Based in Melbourne &amp; Online</div>
+        <div>Email · yourname@example.com</div>
+        <div>Social · <a href="#">@your_handle</a></div>
+        <div>Portfolio · <a href="https://jiris-l.github.io">jiris-l.github.io</a></div>
+      </div>
+    </header>
+
+    <!-- 主体：左侧简介 / 右侧详细内容 -->
+    <div class="main-layout">
+      <!-- 左侧：概要 / 技能 / 语言 -->
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <div class="section-heading">Profile</div>
+          <div class="section-heading-cn">个人简介</div>
+          <p>
+            I move between literature, digital culture, and community spaces. I write,
+            organise, and experiment with ways of telling stories across media.
+          </p>
+          <p class="muted">
+            我的实践游走在文学、数字文化与社区空间之间：写作、策划、记录，
+            用语言与图像搭建属于自己的小宇宙。
+          </p>
+        </section>
+
+        <section class="sidebar-block">
+          <div class="section-heading">Focus</div>
+          <div class="section-heading-cn">关注与方向</div>
+          <div>
+            <span class="pill">Literary &amp; fan writing</span>
+            <span class="pill">Digital storytelling</span>
+            <span class="pill">Social media practice</span>
+            <span class="pill">Community events</span>
+          </div>
+          <div class="badge-row">
+            <span class="pill">文学与同人创作</span>
+            <span class="pill">数字叙事</span>
+            <span class="pill">社交媒体实践</span>
+            <span class="pill">社团活动策划</span>
+          </div>
+        </section>
+
+        <section class="sidebar-block">
+          <div class="section-heading">Skills</div>
+          <div class="section-heading-cn">技能概览</div>
+          <p>
+            • Writing &amp; editing (EN / CN)<br />
+            • Social media content &amp; operations<br />
+            • Event planning &amp; coordination<br />
+            • Basic design &amp; layout
+          </p>
+          <p class="muted">
+            • 中英写作与文本润色<br />
+            • 社交媒体内容策划与运营<br />
+            • 社团 / 活动策划与执行<br />
+            • 基础排版与视觉协同
+          </p>
+        </section>
+
+        <section class="sidebar-block">
+          <div class="section-heading">Languages</div>
+          <div class="section-heading-cn">语言</div>
+          <p>
+            Chinese · Native / 中文（母语）<br />
+            English · Advanced / 英语（流利）
+          </p>
+        </section>
+      </aside>
+
+      <!-- 右侧：Works / Projects / Experience / Activities -->
+      <section class="content">
+        <!-- 文学作品 -->
+        <section class="block">
+          <div class="section-heading">Works</div>
+          <div class="section-heading-cn">文学与创作</div>
+
+          <div class="block">
+            <div class="block-title">Selected Writing · Fiction &amp; Fanworks</div>
+            <div class="block-subtitle">短篇小说 · 同人作品选</div>
+            <div class="block-body">
+              <p>
+                A small collection of original and fan-based stories exploring memory,
+                attachment, and the quiet violence of everyday life.
+              </p>
+              <p class="muted">
+                若干原创与同人短篇，围绕记忆、依恋与日常之中的温柔暴力展开。
+              </p>
+              <!-- TODO: 把这里的 # 换成你实际的链接（比如 WordPress 文章） -->
+              <p class="muted">
+                Links / 链接：
+                <a href="#">Story 01</a> · <a href="#">Story 02</a> · <a href="#">More...</a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 社交媒体 & 项目 -->
+        <section class="block">
+          <div class="section-heading">Projects</div>
+          <div class="section-heading-cn">社交媒体与项目实践</div>
+
+          <div class="block">
+            <div class="block-title">Social Media Operation</div>
+            <div class="block-subtitle">社交媒体运营 · 账号与内容</div>
+            <div class="block-body">
+              <p>
+                Curating and managing content for platforms such as Xiaohongshu / WeChat,
+                focusing on culture, events, and everyday aesthetics.
+              </p>
+              <p class="muted">
+                运营与协助运营多个社交媒体账号（如小红书、公众号等），围绕文化活动、
+                学习生活与日常美学进行内容策划与更新。
+              </p>
+              <p class="muted">
+                • Content planning / 内容策划<br />
+                • Copywriting &amp; captions / 文案撰写<br />
+                • Basic visual design / 基础排版设计<br />
+                • Analytics &amp; reflection / 数据观察与复盘
+              </p>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-title">Community &amp; Society Events</div>
+            <div class="block-subtitle">社团活动 · 策划与执行</div>
+            <div class="block-body">
+              <p>
+                Planning and supporting events such as cultural salons, small gatherings,
+                and themed activities within student societies.
+              </p>
+              <p class="muted">
+                参与或负责社团活动的前期策划、宣传材料撰写、现场协调与后期记录，
+                包括文化沙龙、小型聚会及主题活动等。
+              </p>
+              <p class="muted">
+                （在这里可以写上具体活动名称和时间，之后我们可以一起细化）
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 经历 / 教育 -->
+        <section class="block">
+          <div class="section-heading">Experience</div>
+          <div class="section-heading-cn">经历与教育</div>
+
+          <div class="block">
+            <div class="block-title">Master of Education · University of Melbourne</div>
+            <div class="block-subtitle">墨尔本大学 · 教育学硕士</div>
+            <div class="block-time">Year – Year</div>
+            <div class="block-body">
+              <p>
+                Focusing on language, digital literacies, and equitable learning
+                environments, with research and coursework that inform my creative and
+                community practice.
+              </p>
+              <p class="muted">
+                关注语言教育、数字素养与公平学习环境等议题，将课堂中的研究与
+                理论反哺到个人创作与社群实践之中。
+              </p>
+            </div>
+          </div>
+
+          <!-- 你可以在这里继续加 本科 / 实习 / 兼职 等 -->
+        </section>
+
+        <!-- About -->
+        <section class="block">
+          <div class="section-heading">About</div>
+          <div class="section-heading-cn">关于我</div>
+
+          <div class="block-body">
+            <p>
+              I am interested in how people read, write, and create outside of formal
+              spaces—online, in fandoms, in student societies—and how these practices can
+              be taken seriously.
+            </p>
+            <p class="muted">
+              我好奇的是：人们在正式课堂之外如何阅读、写作与创作——在网络上、
+              在同人圈、在社团与日常小聚中——以及这些实践如何被认真对待。
+            </p>
+            <p class="muted">
+              This website is a small archive to hold these pieces together: the writing,
+              the projects, and the worlds that are still in progress.
+            </p>
+            <p class="muted">
+              这个网站是一个小小的档案馆，用来安放这些仍在进行中的片段：
+              文本、项目，以及尚未完结的世界。
+            </p>
+          </div>
+        </section>
+      </section>
+    </div>
+
+    <div class="footer-note">
+      <!-- 你可以之后改成你喜欢的句子 -->
+      Last updated by Jing Jin · Hosted on GitHub Pages
+    </div>
+  </main>
+</body>
+</html>

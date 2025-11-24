@@ -180,41 +180,34 @@ section p {
   transform: translateY(0);
 }
 
-  /* ------- 书签风图片样式 ------- */
-.bookmark-wrap {
+/* ------- 图片像书签，被下面文字压住一部分 ------- */
+.bookmark-stack {
   margin-top: 32px;
-  padding: 24px 0 8px;
   position: relative;
 }
 
-/* 上面那一点点像书页折痕的线 */
-.bookmark-wrap::before {
-  content: "";
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 0;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.06);
-}
-
-/* 书签本体 */
-.bookmark-img {
+/* 上面的细长图片书签 */
+.bookmark-stack-img {
   display: block;
   margin: 0 auto;
-  max-height: 260px;     /* 控制成偏细长的竖图感觉 */
+  max-height: 260px;      /* 决定“书签”的长度，可以自己调 */
   width: auto;
-  border-radius: 3px 3px 10px 10px;  /* 上直下稍微圆一点，像纸 */
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
-  transform: translateY(-8px);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 4px 4px 10px 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+  filter: brightness(0.96);
 }
 
-/* 鼠标悬停的时候微微晃动一下 */
-.bookmark-img:hover {
-  transform: translateY(-4px) rotate(-1.2deg);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+/* 下面的文字卡片，压住图片的一部分 */
+.bookmark-stack-card {
+  position: relative;
+  max-width: 520px;
+  margin: -80px auto 0;   /* 这里的 -80px 决定“压住”的高度，可以调 */
+  padding: 16px 20px;
+  background: rgba(244, 241, 236, 0.94); /* 带一点透明感 */
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
 }
+
   </style>
 </head>
 

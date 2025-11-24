@@ -40,57 +40,80 @@
       color: var(--accent);
     }
 
-    /* 页面整体布局 */
-    .page {
-      display: grid;
-      grid-template-columns: 48px auto;
-      gap: 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 20px 80px;
-    }
-
-    @media(max-width: 900px){
-      .page {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-
-    /* 左侧图标导航 */
+    /* 左侧悬浮图标导航 */
     .sidebar {
-      position: sticky;
-      top: 0;
-      height: 100vh;
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 32px;
+      gap: 28px;
       font-size: 22px;
+      z-index: 10;
     }
 
-    .sidebar a {
+    .sidebar-link {
+      position: relative;
       color: var(--text-muted);
       transition: transform 0.2s ease, color 0.2s ease;
     }
 
-    .sidebar a:hover {
+    .sidebar-link:hover {
       color: var(--accent);
       transform: scale(1.15);
     }
 
-    @media(max-width: 900px){
+    .sidebar-label {
+      position: absolute;
+      left: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.75);
+      color: #fdfaf5;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .sidebar-link:hover .sidebar-label {
+      opacity: 1;
+      transform: translateY(-50%) translateX(2px);
+    }
+
+    /* 移动端：导航不固定在左侧，改为顶部一行 */
+    @media(max-width: 800px){
       .sidebar {
         position: static;
-        height: auto;
+        transform: none;
         flex-direction: row;
         justify-content: center;
-        padding-bottom: 20px;
+        padding-top: 18px;
+      }
+
+      .sidebar-label {
+        display: none; /* 手机上就不弹出文字提示了，免得挡住 */
       }
     }
 
-    /* 主体内容 */
+    /* 主体内容整体居中 */
+    .content-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    @media(max-width: 800px){
+      .content-wrapper {
+        padding-top: 30px;
+      }
+    }
+
     .content {
       display: flex;
       flex-direction: column;
@@ -98,7 +121,36 @@
     }
 
     section {
-      max-width: 680px;
+      width: 100%;
+    }
+
+    /* 不同 section 略有排版差异 */
+    #about {
+      text-align: left;
+    }
+
+    #works {
+      margin-left: 4%;
+    }
+
+    #projects {
+      margin-left: 8%;
+    }
+
+    #media {
+      margin-left: 4%;
+    }
+
+    #contact {
+      text-align: center;
+    }
+
+    @media(max-width: 800px){
+      #works,
+      #projects,
+      #media {
+        margin-left: 0;
+      }
     }
 
     h2 {
@@ -123,35 +175,48 @@
       color: var(--text-muted);
     }
 
-    /* 滚动动画（但不隐藏文字） */
+    /* 滚动动画：淡入 + 轻微淡出 */
     .reveal {
       opacity: 0;
       transform: translateY(25px);
-      transition: all 0.9s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
   </style>
 </head>
 
 <body>
 
-<div class="page">
+<!-- 左侧小图标导航 -->
+<nav class="sidebar">
+  <a href="#about" class="sidebar-link">
+    ●
+    <span class="sidebar-label">About / 关于</span>
+  </a>
+  <a href="#works" class="sidebar-link">
+    ✎
+    <span class="sidebar-label">Works / 作品</span>
+  </a>
+  <a href="#projects" class="sidebar-link">
+    ✿
+    <span class="sidebar-label">Projects / 项目</span>
+  </a>
+  <a href="#media" class="sidebar-link">
+    ☽
+    <span class="sidebar-label">Media / 自媒体</span>
+  </a>
+  <a href="#contact" class="sidebar-link">
+    ✉
+    <span class="sidebar-label">Contact / 联系</span>
+  </a>
+</nav>
 
-  <!-- 左侧符号 -->
-  <nav class="sidebar">
-    <a href="#about" title="About">●</a>
-    <a href="#works" title="Works">✎</a>
-    <a href="#projects" title="Projects">✿</a>
-    <a href="#media" title="Media">☽</a>
-    <a href="#contact" title="Contact">✉</a>
-  </nav>
-
-  <!-- 右侧内容 -->
+<!-- 中间纵向内容 -->
+<div class="content-wrapper">
   <main class="content">
 
     <!-- ABOUT -->
@@ -160,7 +225,7 @@
       <div class="cn">月迷津渡</div>
 
       <p>
-        I write, organise, and quietly build small worlds out of fragments, 
+        I write, organise, and quietly build small worlds out of fragments,
         memories, and half-finished sentences.
       </p>
 
@@ -182,14 +247,14 @@
 
       <p><strong>Marriage as a Fortress Surrounding Women</strong></p>
       <p class="muted">
-        议论文｜关于性别、婚姻与被忽视的围墙
+        议论文｜关于性别、婚姻与被忽视的围墙。
       </p>
 
       <br/>
 
       <p><strong>The Artu Estate · 阿尔图宅邸</strong></p>
       <p class="muted">
-        《苏丹的游戏》同人创作，在宅邸、王座与未尽的情感中书写记忆。
+        《苏丹的游戏》同人创作，在宅邸、王座与未尽之言中书写记忆。
       </p>
     </section>
 
@@ -200,14 +265,16 @@
 
       <p><strong>Hanfu Model Contest</strong></p>
       <p class="muted">
-        参与宣传文案与音乐策划，设计音效、素材收集与现场播放控制。
+        参与汉服模特大赛的整体筹备，负责宣传文案撰写与音乐部分策划，
+        包括音效设计、素材收集与现场播放控制。
       </p>
 
       <br/>
 
       <p><strong>Tang-Style Hanfu Banquet</strong></p>
       <p class="muted">
-        社团迎新活动的核心策划成员，参与统筹、创意构思与执行。
+        社团迎新活动「唐风裙幄宴」的核心策划成员，参与活动方案制定、
+        时间轴规划与现场执行，让新成员在仪式感中进入社群。
       </p>
     </section>
 
@@ -216,23 +283,26 @@
       <h2>Media</h2>
       <div class="cn">自媒体 · 视觉 · 排版</div>
 
-      <p><strong>Xiaohongshu (Personal Account — paused)</strong></p>
+      <p><strong>Xiaohongshu (Personal Account · paused)</strong></p>
       <p class="muted">
-        6个月独立运营，平均阅读量 1,000+，单篇最高 10,000+，获赞 200+
+        独立运营房产相关小红书账号约 6 个月，平均阅读量 1,000+，
+        单篇最高阅读 10,000+，获赞 200+。
       </p>
 
       <br/>
 
       <p><strong>Melbourne Hanfu Society</strong></p>
       <p class="muted">
-        负责小红书官方账号管理与更新，发布活动与视频内容
+        管理墨尔本汉服社官方小红书账号，发布活动通知、现场照片
+        与短视频，维持社群的线上存在感。
       </p>
 
       <br/>
 
       <p><strong>EIC Education</strong></p>
       <p class="muted">
-        编辑微信公众号文章，参与活动宣传小程序页面设计
+        在启德教育实习期间，编辑三篇微信公众号文章内容，
+        并参与多个活动宣传小程序页面的设计与更新。
       </p>
     </section>
 
@@ -251,7 +321,6 @@
     </section>
 
   </main>
-
 </div>
 
 <script>
@@ -259,9 +328,12 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+      } else {
+        // 离开视口时轻微淡出
+        entry.target.classList.remove('visible');
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.25 });
 
   document.querySelectorAll('.reveal').forEach(el => {
     observer.observe(el);
@@ -270,4 +342,3 @@
 
 </body>
 </html>
-

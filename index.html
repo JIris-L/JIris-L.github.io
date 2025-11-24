@@ -376,6 +376,47 @@ section p {
     border-bottom: 2px solid var(--accent);
   }
 }
+/* ========== Media (Other Noteworthy Projects) ========== */
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.media-card {
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 20px;
+  border-radius: 12px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.media-title {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.media-tags {
+  margin-top: 14px;
+}
+
+.media-tags span {
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 8px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  background: rgba(194,142,106,0.12);
+  color: var(--accent);
+}
 
 
   </style>
@@ -604,31 +645,73 @@ section p {
 
     <!-- MEDIA -->
     <section id="media" class="reveal">
-      <h2>Media</h2>
-      <div class="cn">自媒体 · 视觉 · 排版</div>
 
-      <p><strong>Xiaohongshu (Personal Account · paused)</strong></p>
+  <h2>Other Noteworthy Projects</h2>
+  <div class="cn">自媒体运营 · Social Media & Content</div>
+
+  <div class="media-grid">
+
+    <!-- 1 小红书账号（房产） -->
+    <div class="media-card">
+      <p class="media-title">Xiaohongshu · Real Estate Content</p>
+
       <p class="muted">
-        独立运营房产相关小红书账号约 6 个月，平均阅读量 1,000+，
-        单篇最高阅读 10,000+，获赞 200+。
+        6-month independent operation · 1,000+ avg views
       </p>
 
-      <br/>
-
-      <p><strong>Melbourne Hanfu Society</strong></p>
-      <p class="muted">
-        管理墨尔本汉服社官方小红书账号，发布活动通知、现场照片
-        与短视频，维持社群的线上存在感。
+      <p class="cn">
+        独立运营半年，平均浏览量达 1,000+，单篇最高超过 10,000+，获赞 200+
       </p>
 
-      <br/>
+      <div class="media-tags">
+        <span>RED</span>
+        <span>Content</span>
+        <span>Analytics</span>
+      </div>
+    </div>
 
-      <p><strong>EIC Education</strong></p>
+    <!-- 2 墨尔本汉服社 -->
+    <div class="media-card">
+      <p class="media-title">Melbourne Hanfu Society</p>
+
       <p class="muted">
-        在启德教育实习期间，编辑多篇微信公众号文章内容，
-        并参与小程序页面的设计与更新。
+        Social Media & Visual Content
       </p>
-    </section>
+
+      <p class="cn">
+        负责社团小红书账号的运营与更新，发布活动通知、现场照片与短视频。
+      </p>
+
+      <div class="media-tags">
+        <span>Community</span>
+        <span>Visual</span>
+        <span>Campaign</span>
+      </div>
+    </div>
+
+    <!-- 3 启德公众号 -->
+    <div class="media-card">
+      <p class="media-title">EIC Education · WeChat Account</p>
+
+      <p class="muted">
+        Official articles & Mini-program content
+      </p>
+
+      <p class="cn">
+        编辑公众号文章内容，并协助多个活动宣传小程序的设计与发布。
+      </p>
+
+      <div class="media-tags">
+        <span>WeChat</span>
+        <span>Copywriting</span>
+        <span>Education</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
 
     <!-- CONTACT -->
     <section id="contact" class="reveal">

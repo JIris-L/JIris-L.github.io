@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>月迷津渡 · Jing Jin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"
     rel="stylesheet"
@@ -14,7 +13,7 @@
   <style>
     :root {
       --bg: #f4f1ec;
-      --text-main: #222222;
+      --text-main: #1f1f1f;
       --text-muted: #777;
       --accent: #c28e6a;
     }
@@ -26,49 +25,54 @@
     }
 
     html, body {
-      height: 100%;
+      min-height: 100%;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Inter","PingFang SC","Microsoft YaHei",sans-serif;
       background: var(--bg);
       color: var(--text-main);
+      font-family: "Inter","PingFang SC","Microsoft YaHei",sans-serif;
     }
 
-    a { color: var(--accent); text-decoration: none; }
+    a {
+      text-decoration: none;
+      color: var(--accent);
+    }
 
+    /* 页面整体布局 */
     .page {
       display: grid;
-      grid-template-columns: 80px auto;
-      gap: 60px;
+      grid-template-columns: 48px auto;
+      gap: 40px;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 60px 20px 80px;
     }
 
-    @media (max-width: 900px) {
+    @media(max-width: 900px){
       .page {
         grid-template-columns: 1fr;
         gap: 40px;
       }
     }
 
-    /* 左侧图标列 */
-
+    /* 左侧图标导航 */
     .sidebar {
       position: sticky;
-      top: 60px;
+      top: 0;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 36px;
-      font-size: 22px;
       align-items: center;
+      justify-content: center;
+      gap: 32px;
+      font-size: 22px;
     }
 
     .sidebar a {
       color: var(--text-muted);
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease, color 0.2s ease;
     }
 
     .sidebar a:hover {
@@ -76,8 +80,17 @@
       transform: scale(1.15);
     }
 
-    /* 右侧内容 */
+    @media(max-width: 900px){
+      .sidebar {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        justify-content: center;
+        padding-bottom: 20px;
+      }
+    }
 
+    /* 主体内容 */
     .content {
       display: flex;
       flex-direction: column;
@@ -91,29 +104,30 @@
     h2 {
       font-size: 20px;
       font-weight: 500;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .cn {
       font-size: 14px;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     p {
       font-size: 15px;
       line-height: 1.9;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .muted { color: var(--text-muted); }
+    .muted {
+      color: var(--text-muted);
+    }
 
-    /* 动画 */
-
+    /* 滚动动画（但不隐藏文字） */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: 0.9s ease;
+      transform: translateY(25px);
+      transition: all 0.9s ease;
     }
 
     .reveal.visible {
@@ -128,85 +142,132 @@
 
 <div class="page">
 
-  <!-- 左侧符号导航 -->
+  <!-- 左侧符号 -->
   <nav class="sidebar">
-    <a href="#about">●</a>
-    <a href="#works">✎</a>
-    <a href="#projects">✿</a>
-    <a href="#media">☽</a>
-    <a href="#contact">✉</a>
+    <a href="#about" title="About">●</a>
+    <a href="#works" title="Works">✎</a>
+    <a href="#projects" title="Projects">✿</a>
+    <a href="#media" title="Media">☽</a>
+    <a href="#contact" title="Contact">✉</a>
   </nav>
 
   <!-- 右侧内容 -->
   <main class="content">
 
+    <!-- ABOUT -->
     <section id="about" class="reveal">
       <h2>Moonlit Crossing</h2>
       <div class="cn">月迷津渡</div>
 
       <p>
-        I write, organise, and quietly build small worlds out of fragments,
+        I write, organise, and quietly build small worlds out of fragments, 
         memories, and half-finished sentences.
       </p>
 
       <p class="muted">
-        本升硕。徘徊在文学、数字文化与社群空间之间，在碎片、记忆与未完成的句子中搭建小世界。
-        B站六级用户，BJD娃娘，费伦大陆救世主，以及另一个世界的光之战士。
+        本升硕。徘徊在文学、数字文化与社群空间之间，
+        在碎片、记忆与未完成的句子中搭建属于自己的小世界。
+      </p>
+
+      <p class="muted">
+        B站六级用户，BJD 娃娘，费伦大陆救世主，
+        也是另一个世界的光之战士。
       </p>
     </section>
 
+    <!-- WORKS -->
     <section id="works" class="reveal">
       <h2>Works</h2>
       <div class="cn">多文体创作合集</div>
 
       <p><strong>Marriage as a Fortress Surrounding Women</strong></p>
-      <p class="muted">议论文｜关于性别、婚姻与被忽视的围墙</p>
+      <p class="muted">
+        议论文｜关于性别、婚姻与被忽视的围墙
+      </p>
 
       <br/>
 
-      <p><strong>The Artu Estate</strong></p>
+      <p><strong>The Artu Estate · 阿尔图宅邸</strong></p>
       <p class="muted">
-        《苏丹的游戏》同人创作，在宅邸、王座与未说出口的情感之间书写记忆。
+        《苏丹的游戏》同人创作，在宅邸、王座与未尽的情感中书写记忆。
       </p>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects" class="reveal">
       <h2>Projects</h2>
       <div class="cn">活动策划</div>
 
       <p><strong>Hanfu Model Contest</strong></p>
       <p class="muted">
-        负责活动宣传文案与音乐策划，设计音效、素材收集与现场播放控制。
+        参与宣传文案与音乐策划，设计音效、素材收集与现场播放控制。
       </p>
 
       <br/>
 
       <p><strong>Tang-Style Hanfu Banquet</strong></p>
       <p class="muted">
-        社团迎新活动的核心策划成员，参与统筹、创意构思与现场执行。
+        社团迎新活动的核心策划成员，参与统筹、创意构思与执行。
       </p>
     </section>
 
+    <!-- MEDIA -->
     <section id="media" class="reveal">
       <h2>Media</h2>
-      <div class="cn">自媒体与海报设计</div>
+      <div class="cn">自媒体 · 视觉 · 排版</div>
 
-      <p><strong>Xiaohongshu (Personal – paused)</strong></p>
+      <p><strong>Xiaohongshu (Personal Account — paused)</strong></p>
       <p class="muted">
-        6个月独立运营，平均阅读1,000+，单篇10,000+，获赞200+
+        6个月独立运营，平均阅读量 1,000+，单篇最高 10,000+，获赞 200+
       </p>
 
       <br/>
 
       <p><strong>Melbourne Hanfu Society</strong></p>
       <p class="muted">
-        管理小红书官方账号，更新活动、视频与图文内容
+        负责小红书官方账号管理与更新，发布活动与视频内容
       </p>
 
       <br/>
 
-      <p><strong>EIC Educa
+      <p><strong>EIC Education</strong></p>
+      <p class="muted">
+        编辑微信公众号文章，参与活动宣传小程序页面设计
+      </p>
+    </section>
 
-  </script>
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <h2>Contact</h2>
+      <div class="cn">与你相遇的方式</div>
+
+      <p>
+        If any of these fragments resonate with you, you can reach me at:
+      </p>
+
+      <p class="muted">
+        your.email@example.com
+      </p>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
 </body>
 </html>
+

@@ -200,8 +200,14 @@ section p {
   position: absolute;
   right: 0;
   top: 40px;
-  z-index: 1; /* 在文字后面 */
+  z-index: 1;
 }
+
+/* ✅ 这段强制关闭 works 里的绝对定位 */
+#works .overlap-img-wrap {
+  position: static;
+}
+
 
 /* 图片本体 */
 .overlap-img {
@@ -235,6 +241,49 @@ section p {
     margin-top: 30px;
     right: auto;
     top: 0;
+  }
+}
+
+/* ===== Works 区：统一图像大小 ===== */
+#works .overlap-img {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 4px 4px 10px 10px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* hover 动效保留 */
+#works .overlap-img:hover {
+  transform: translateY(-8px) rotate(-1.5deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+}
+
+/* ===== 字左图右（阿尔图现在这一版）===== */
+#works .artu-right {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 80px 0;
+}
+
+/* ===== 图左字右（你说的第二个）===== */
+#works .artu-left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 80px 0;
+  flex-direction: row-reverse;    /* 核心：反过来 */
+}
+
+/* 手机端统一为上下排列 */
+@media (max-width: 800px) {
+  #works .artu-right,
+  #works .artu-left {
+    flex-direction: column;
   }
 }
 
@@ -297,9 +346,8 @@ section p {
   <h2>Some Things I’ve Written</h2>
   <div class="cn">多文体创作 · Works</div>
 
-  <div class="overlap-item">
+  <div class="overlap-item artu-right">
 
-  <!-- 左边的文字 -->
   <div class="overlap-text">
     <p><strong>The Artu Estate</strong></p>
     <p class="muted">
@@ -308,26 +356,34 @@ section p {
     <p class="muted">
       《苏丹的游戏》同人创作，在宅邸、王位与未尽之言间展开
     </p>
-    <p style="font-size:12px; color:#aaa;">
-      #fanfiction #narrative #worldbuilding
+  </div>
+
+  <div class="overlap-img-wrap">
+    <img src="images/restw.jpg" class="overlap-img">
+  </div>
+
+ </div>
+
+
+
+ <div class="overlap-item artu-left">
+
+  <div class="overlap-text">
+    <p><strong>Marriage as a Fortress Surrounding Women</strong></p>
+    <p class="muted">
+      Argumentative essay · Gender · Society
+    </p>
+    <p class="muted">
+      一篇以女性和婚姻为主题的议论文写作。
     </p>
   </div>
 
-  <!-- 右边的图片书签 -->
   <div class="overlap-img-wrap">
-    <img src="images/restw.jpg" class="overlap-img">
-
-</div>
-
-
-
-  <!-- 项目 2 -->
-  <div style="margin:40px 0;">
-    <p><strong>Marriage as a Fortress Surrounding Women</strong></p>
-    <p class="muted">Argumentative Essay · Gender · Society</p>
-    <p class="muted">关于性别、婚姻与女性处境的思考</p>
-    <p style="font-size:12px; color:#aaa;">#essay #gender #writing</p>
+    <img src="images/yd.jpg" class="overlap-img">
   </div>
+
+ </div>
+
 
 </section>
 

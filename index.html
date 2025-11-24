@@ -152,17 +152,18 @@ p {
 
 .muted { color: var(--text-muted); }
 
-/* About 独占一屏并居中 */
-#about {
+/* 每一段（所有 section）都独占一屏 + 居中 */
+section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-#about h2,
-#about .cn,
-#about p {
+/* 每一段的文字宽度都控制在一个范围内 */
+section h2,
+section .cn,
+section p {
   max-width: 520px;
 }
 

@@ -179,17 +179,18 @@ section p {
   max-width: 520px;
 }
 
-/* 滚动动画 */
+/* 暂时先让所有内容都显示出来 */
 .reveal {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* 保留一个类，方便以后想加动画 */
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 /* ========== 字在左，图在右，被压住的书签效果 ========== */
 

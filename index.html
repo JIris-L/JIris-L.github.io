@@ -120,7 +120,9 @@ a {
 
 
 /* 每段的排版略有不同 */
-#about { text-align: left; }
+#about {
+  text-align: center;
+}
 #works { margin-left: 4%; }
 #projects { margin-left: 8%; }
 #media { margin-left: 4%; }
@@ -153,12 +155,28 @@ p {
 
 .muted { color: var(--text-muted); }
 /* 中文专用：仿宋 + 书页感 */
-/* 只有 About 的书页部分用仿宋 */
-#about .cn,
-#about .manifesto,
-#about .manifesto-sub {
+/* 只给 About 里的中文用仿宋 */
+#about .cn {
   font-family: "FangSong", "STFangsong", "SimSun", serif;
   letter-spacing: 0.06em;
+}
+
+/* 引语那句稍微大一点，有书页感 */
+#about .manifesto .cn {
+  font-size: 19px;
+  line-height: 2.2;
+}
+
+/* 补充说明里的中文稍微小一点 */
+#about .manifesto-sub .cn {
+  font-size: 17px;
+  line-height: 2;
+}
+
+#about h2 {
+  font-size: 26px;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
 }
 
 

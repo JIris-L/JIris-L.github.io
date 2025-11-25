@@ -153,15 +153,14 @@ p {
 
 .muted { color: var(--text-muted); }
 /* 中文专用：仿宋 + 书页感 */
-.cn,
-p.cn,
-span.cn,
-li.cn {
+/* 只有 About 的书页部分用仿宋 */
+#about .cn,
+#about .manifesto,
+#about .manifesto-sub {
   font-family: "FangSong", "STFangsong", "SimSun", serif;
-  font-size: 16px;        /* 比你现在的 15px 略大一点 */
-  line-height: 2;         /* 行距拉开一点，会有书页感 */
-  letter-spacing: 0.06em; /* 稍微加一点字间距，更像排版 */
+  letter-spacing: 0.06em;
 }
+
 
 /* section 基础设置 */
 section {
@@ -179,13 +178,14 @@ section p {
   max-width: 520px;
 }
 
-/* 暂时先让所有内容都显示出来 */
+/* 默认隐藏 */
 .reveal {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-/* 保留一个类，方便以后想加动画 */
+/* 进入视口后显示 */
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
@@ -450,8 +450,8 @@ section p {
   /* 引语：书页感 */
 .manifesto {
   font-family: "FangSong", "STFangsong", serif;
-  font-size: 18px;
-  line-height: 2;
+  font-size: 19px;
+  line-height: 2.2;
   letter-spacing: 0.08em;
   max-width: 520px;
   margin: 60px auto 40px;
@@ -481,7 +481,7 @@ section p {
 
 .manifesto-sub .cn {
   font-family: "FangSong", "STFangsong", serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 2;
   letter-spacing: 0.06em;
 }
@@ -536,38 +536,41 @@ section p {
   <main class="content">
 
     <!-- ABOUT -->
-    <section id="about" class="reveal">
-<h2>Moonlit Crossing</h2>
-<div class="cn">月迷津渡</div>
+<section id="about" class="reveal">
 
-<!-- 引语：中英双语 -->
-<blockquote class="manifesto">
-  <span class="cn">
-    我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
-  </span>
-  <span class="en">
-    I build the lives of my characters from fragments, memories, and unspoken words.
-  </span>
-</blockquote>
+  <h2>Moonlit Crossing</h2>
+  <div class="cn">月迷津渡</div>
 
-<!-- 补充说明：中英双语 -->
-<div class="manifesto-sub">
-  <p class="en">
-    Alongside my creative work, my practice also extends to event planning, education,
-    and corporate and financial environments, which offer additional perspectives for
-    the way I construct narratives.
-  </p>
+  <div class="manifesto">
+    
+    <span class="en">
+      I build the lives of my characters from fragments, memories, and unspoken words.
+    </span>
+    <span class="cn">
+      我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
+    </span>
 
-  <p class="cn">
-    除此之外，我的实践也延伸至活动策划、教育与企业及金融环境之中，
-    这些经历为我的叙事提供了更多视角。
-  </p>
-</div>
+  </div>
 
-<!-- 划掉彩蛋 -->
-<p class="easter-egg strike">
-  B站六级用户 · BJD 娃娘 · 费伦大陆救世主
-</p>
+  <div class="manifesto-sub">
+
+    <p class="en">
+      Beyond creative writing, my practice extends to event planning, education,
+      and corporate and financial environments — experiences that shape the way
+      I observe the world and construct narratives.
+    </p>
+
+    <p class="cn">
+      除此之外，我的实践也延伸至活动策划、教育领域与企业及金融环境之中，
+      这些经历为我的叙事提供了更多维度与视角。
+    </p>
+
+  </div>
+
+</section>
+
+
+
 
 
 <!-- WORKS -->
@@ -897,6 +900,7 @@ section p {
       <p class="muted">
         shellyj2015@hotmail.com
       </p>
+      
     </section>
 
   </main>

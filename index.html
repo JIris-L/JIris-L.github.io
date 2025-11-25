@@ -154,31 +154,72 @@ p {
 }
 
 .muted { color: var(--text-muted); }
-/* 中文专用：仿宋 + 书页感 */
-/* 只给 About 里的中文用仿宋 */
-#about .cn {
-  font-family: "FangSong", "STFangsong", "SimSun", serif;
-  letter-spacing: 0.06em;
-}
-
-/* 引语那句稍微大一点，有书页感 */
-#about .manifesto .cn {
-  font-size: 19px;
-  line-height: 2.2;
-}
-
-/* 补充说明里的中文稍微小一点 */
-#about .manifesto-sub .cn {
-  font-size: 17px;
-  line-height: 2;
-}
-
+/* About 整体标题稍微大一点 */
 #about h2 {
   font-size: 26px;
   letter-spacing: 0.12em;
   margin-bottom: 8px;
+  text-align: center;
 }
 
+/* “月迷津渡”副标题 */
+#about .cn {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* 上面那对核心句：中 + 英，全部居中 */
+.manifesto {
+  text-align: center;
+  margin: 40px auto 32px;
+  max-width: 620px;
+}
+
+/* 中文核心句：仿宋 + 稍大 */
+.manifesto .cn {
+  display: block;
+  font-family: "FangSong", "STFangsong", "SimSun", serif;
+  font-size: 19px;        /* ≈ 14.5pt */
+  line-height: 2.1;
+  letter-spacing: 0.08em;
+  color: var(--text-main);   /* 不用灰色，和正文同色 */
+}
+
+/* 英文核心句：居中、略小一点点 */
+.manifesto .en {
+  display: block;
+  margin-top: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+}
+
+/* 下面那对“除此之外”说明：也全部居中，但字号略小 */
+.manifesto-sub {
+  max-width: 640px;
+  margin: 10px auto 40px;
+  text-align: center;
+}
+
+/* 英文说明 */
+.manifesto-sub .en {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;        /* ≈ 12pt */
+  line-height: 1.9;
+  margin-bottom: 14px;
+  color: var(--text-main);
+}
+
+/* 中文说明：仿宋 + 稍小于上面那句 */
+.manifesto-sub .cn {
+  font-family: "FangSong", "STFangsong", "SimSun", serif;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  color: var(--text-main);
+}
 
 /* section 基础设置 */
 section {
@@ -465,45 +506,6 @@ section p {
   text-align: center;
 }
 
-  /* 引语：书页感 */
-.manifesto {
-  font-family: "FangSong", "STFangsong", serif;
-  font-size: 19px;
-  line-height: 2.2;
-  letter-spacing: 0.08em;
-  max-width: 520px;
-  margin: 60px auto 40px;
-  text-align: center;
-}
-
-.manifesto .en {
-  display: block;
-  margin-top: 18px;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-
-/* 引语补充段落 */
-.manifesto-sub {
-  max-width: 560px;
-  margin: 20px auto 60px;
-}
-
-.manifesto-sub .en {
-  font-size: 15px;
-  line-height: 1.8;
-  margin-bottom: 20px;
-}
-
-.manifesto-sub .cn {
-  font-family: "FangSong", "STFangsong", serif;
-  font-size: 17px;
-  line-height: 2;
-  letter-spacing: 0.06em;
-}
-
 /* 划掉效果彩蛋 */
 .easter-egg {
   text-align: center;
@@ -560,32 +562,27 @@ section p {
   <div class="cn">月迷津渡</div>
 
   <div class="manifesto">
-    
-    <span class="en">
-      I build the lives of my characters from fragments, memories, and unspoken words.
-    </span>
     <span class="cn">
       我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
     </span>
-
+    <span class="en">
+      I build the lives of my characters from fragments, memories, and unspoken words.
+    </span>
   </div>
 
   <div class="manifesto-sub">
-
     <p class="en">
-      Beyond creative writing, my practice extends to event planning, education,
-      and corporate and financial environments — experiences that shape the way
-      I observe the world and construct narratives.
+      Alongside my creative work, I have experience in event planning, education, and organisational environments, which inform the way I observe and construct narratives.
     </p>
 
     <p class="cn">
-      除此之外，我的实践也延伸至活动策划、教育领域与企业及金融环境之中，
+      除此之外，我的实践也延伸至活动策划、教育企业以及金融环境之中，
       这些经历为我的叙事提供了更多维度与视角。
     </p>
-
   </div>
 
 </section>
+
 
 
 

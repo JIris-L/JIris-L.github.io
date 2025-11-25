@@ -110,7 +110,6 @@ a {
   max-width: 760px;
   margin: 0 auto;
   padding: 60px 24px 80px;
-  transform: translateX(20px);
 }
   
 .content {
@@ -119,9 +118,6 @@ a {
   gap: 120px;
 }
 
-section {
-  width: 100%;
-}
 
 /* 每段的排版略有不同 */
 #about { text-align: left; }
@@ -167,8 +163,9 @@ li.cn {
   letter-spacing: 0.06em; /* 稍微加一点字间距，更像排版 */
 }
 
-/* 每一段（所有 section）都独占一屏 + 居中 */
+/* section 基础设置 */
 section {
+  width: 100%;
   min-height: 110vh;
   display: flex;
   flex-direction: column;

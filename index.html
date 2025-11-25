@@ -157,6 +157,16 @@ p {
 }
 
 .muted { color: var(--text-muted); }
+/* 中文专用：仿宋 + 书页感 */
+.cn,
+p.cn,
+span.cn,
+li.cn {
+  font-family: "FangSong", "STFangsong", "SimSun", serif;
+  font-size: 16px;        /* 比你现在的 15px 略大一点 */
+  line-height: 2;         /* 行距拉开一点，会有书页感 */
+  letter-spacing: 0.06em; /* 稍微加一点字间距，更像排版 */
+}
 
 /* 每一段（所有 section）都独占一屏 + 居中 */
 section {
@@ -432,6 +442,68 @@ section p {
 #works .first-work {
   margin-top: 48px;
 }
+  
+.core-line {
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  margin: 72px 0;
+  text-align: center;
+}
+
+  /* 引语：书页感 */
+.manifesto {
+  font-family: "FangSong", "STFangsong", serif;
+  font-size: 18px;
+  line-height: 2;
+  letter-spacing: 0.08em;
+  max-width: 520px;
+  margin: 60px auto 40px;
+  text-align: center;
+}
+
+.manifesto .en {
+  display: block;
+  margin-top: 18px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* 引语补充段落 */
+.manifesto-sub {
+  max-width: 560px;
+  margin: 20px auto 60px;
+}
+
+.manifesto-sub .en {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.manifesto-sub .cn {
+  font-family: "FangSong", "STFangsong", serif;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+
+/* 划掉效果彩蛋 */
+.easter-egg {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  opacity: 0.6;
+  margin-top: 60px;
+}
+
+/* 划掉线的感觉 */
+.strike {
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent);
+}
 
   </style>
 </head>
@@ -468,24 +540,38 @@ section p {
 
     <!-- ABOUT -->
     <section id="about" class="reveal">
-      <h2>Moonlit Crossing</h2>
-      <div class="cn">月迷津渡</div>
+<h2>Moonlit Crossing</h2>
+<div class="cn">月迷津渡</div>
 
-      <p>
-        I quietly build the lives of my characters from fragments, memories, and unspoken words.
-        Alongside my creative work, I have experience in event planning, educational and organisational environments, which shape the way I observe and construct narratives.
-      </p>
+<!-- 引语：中英双语 -->
+<blockquote class="manifesto">
+  <span class="cn">
+    我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
+  </span>
+  <span class="en">
+    I build the lives of my characters from fragments, memories, and unspoken words.
+  </span>
+</blockquote>
 
-      <p class="muted">
-        我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
-        除此之外，我的实践也延伸至活动策划、教育企业及金融环境之中，这些经历为我的叙事提供了更多视角。
-      </p>
+<!-- 补充说明：中英双语 -->
+<div class="manifesto-sub">
+  <p class="en">
+    Alongside my creative work, my practice also extends to event planning, education,
+    and corporate and financial environments, which offer additional perspectives for
+    the way I construct narratives.
+  </p>
 
-      <p class="muted">
-        B站六级用户，BJD 娃娘，费伦大陆救世主
-        
-      </p>
-    </section>
+  <p class="cn">
+    除此之外，我的实践也延伸至活动策划、教育与企业及金融环境之中，
+    这些经历为我的叙事提供了更多视角。
+  </p>
+</div>
+
+<!-- 划掉彩蛋 -->
+<p class="easter-egg strike">
+  B站六级用户 · BJD 娃娘 · 费伦大陆救世主
+</p>
+
 
 <!-- WORKS -->
 <section id="works" class="reveal">

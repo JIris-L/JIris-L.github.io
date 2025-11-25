@@ -172,18 +172,21 @@ p {
 
 /* 上面那对核心句：中 + 英，全部居中 */
 .manifesto {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
-  margin: 40px auto 32px;
-  max-width: 620px;
+  margin: 40px 0 32px;
+  max-width: 680px;
 }
 
 /* 中文核心句：仿宋 + 稍大 */
 .manifesto .cn {
   display: block;
   font-family: "FangSong", "STFangsong", "SimSun", serif;
-  font-size: 19px;        /* ≈ 14.5pt */
+  font-size: 20px;        /* ≈ 14.5pt */
   line-height: 2.1;
-  letter-spacing: 0.04em;  /* 不用灰色，和正文同色 */
+  letter-spacing: 0.04em;  
 }
 
 /* 英文核心句：居中、略小一点点 */
@@ -191,7 +194,7 @@ p {
   display: block;
   margin-top: 10px;
   font-family: "Inter", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.9;
   letter-spacing: 0.04em;
   color: var(--text-main);

@@ -13,6 +13,10 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
+  <link
+  href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap"
+  rel="stylesheet"
+ />
 
 <style>
 :root {
@@ -39,7 +43,15 @@ body {
   color: var(--text-main);
   font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
-
+  
+/* 全部中文 */
+.cn,
+blockquote,
+.manifesto .cn,
+.manifesto-sub .cn {
+  font-family: "Songti SC", "STSong", "SimSun", serif;
+}
+  
 a {
   text-decoration: none;
   color: var(--accent);
@@ -170,14 +182,39 @@ p {
 }
 
 
-/* 中文核心句：仿宋 + 稍大 */
+/* 中文核心句：宋体 + 书签装饰 */
 .manifesto .cn {
-  font-family: "FangSong", "STFangsong", "SimSun", serif;
-  font-size: 20px;
+  position: relative;
+  display: block;
+  font-family: "FangSong", "STFangsong", "Songti SC", serif;  /* ✅ 宋体类 */
+  font-size: 18px;
   line-height: 2;
-  letter-spacing: 0.04em;
-  white-space: nowrap;   /* ✅ 强制一行 */
+  letter-spacing: 0.06em;
+  margin-top: 16px;
 }
+
+/* 上面的 ❦ */
+.manifesto .cn::before {
+  content: "❦";
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+/* 下面那条横线 */
+.manifesto .cn::after {
+  content: "";
+  display: block;
+  width: 60%;
+  max-width: 360px;
+  height: 1px;
+  margin: 14px auto 0;
+  background: rgba(0,0,0,0.12);
+}
+
 
 /* 英文核心句：居中、略小一点点 */
 .manifesto .en {
@@ -188,6 +225,10 @@ p {
   line-height: 1.9;
   letter-spacing: 0.04em;
   color: var(--text-main);
+}
+/* About英文的那一句 */
+.manifesto .en {
+  font-family: "Libre Caslon Text", serif;
 }
 
 /* 下面那对“除此之外”说明：也全部居中，但字号略小 */
@@ -206,22 +247,16 @@ p {
   color: var(--text-main);
 }
 
-/* 中文说明：仿宋 + 稍小于上面那句 */
+/* “除此之外”中文说明：跟正文/Works 同一种字体感 */
 .manifesto-sub .cn {
-  font-family: "FangSong", "STFangsong", "SimSun", serif;
-  font-size: 16px;
-  line-height: 2;
-  letter-spacing: 0.06em;
-}
-  
-.manifesto span {
-  display: block;
-  text-align: center;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: var(--text-main);
 }
 
-.manifesto .cn {
-  margin-top: 12px;
-}
+  
 /* ========== 书页引用感 · Manifesto ========== */
 
 .manifesto,

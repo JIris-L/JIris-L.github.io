@@ -163,18 +163,29 @@ p {
 .muted { color: var(--text-muted); }
 
 
+/* section 基础设置 */
+section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 垂直居中 */
+  padding-bottom: 40px;
+}
+
+/* 让 about 真·居中，不再往下推 */
+#about {
+  text-align: center;
+  padding-top: 0;           /* ✅ 把 80px 去掉 */
+}
+
 /* 上面那块：中 + 英，书页 + 月亮 */
 .manifesto {
   position: relative;
   text-align: center;
-  margin: 0 auto;          /* ✅ 不要上下外边距 */
+  margin: 0 auto;          /* 中心对齐 */
   max-width: 680px;
 
-/* 只微调 About 第一屏的书页位置 */
-#about .about-block:first-of-type .manifesto {
-  margin-top: -32px;   /* 可以调成 -16 / -32 看你肉眼感觉 */
-}
-  
   /* 书页块 */
   background: rgba(255, 253, 247, 0.7);
   padding: 36px 28px;
@@ -190,6 +201,11 @@ p {
     rgba(0,0,0,0.02) 100%
   );
   background-size: 100% 28px;
+}
+
+/* 只微调 About 第一屏的书页位置（可选）*/
+#about .about-block:first-of-type .manifesto {
+  margin-top: -16px;   /* 想再往上移就调到 -24 / -32 */
 }
 
 /* 左书脊线 */
@@ -225,7 +241,7 @@ p {
   padding: 0 10px;
 }
 
-/* 月亮：放在英文句子上面，视觉上就是整个中英块的上方 */
+/* 月亮：放在英文句子上面 */
 .manifesto .en::before {
   content: "☾";
   display: block;
@@ -236,7 +252,7 @@ p {
   opacity: 0.8;
 }
 
-/* 英文核心句：Caslon 风格 */
+/* 英文核心句 */
 .manifesto .en {
   font-family: "Libre Caslon Text", serif;
   font-size: 18px;
@@ -245,7 +261,7 @@ p {
   color: var(--text-main);
 }
 
-/* 中文核心句：宋体书页感 */
+/* 中文核心句 */
 .manifesto .cn {
   position: relative;
   display: block;
@@ -256,7 +272,7 @@ p {
   margin-top: 16px;
 }
 
-/* 下面那对“除此之外”：普通文字，不再是书页框 */
+/* 下面那对“除此之外” */
 .manifesto-sub {
   max-width: 640px;
   margin: 14px auto 40px;
@@ -272,7 +288,7 @@ p {
   color: var(--text-main);
 }
 
-/* 中文说明：跟 Works 一致的中文字体 */
+/* 中文说明 */
 .manifesto-sub .cn {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 15px;
@@ -292,6 +308,7 @@ p {
     display: none;
   }
 }
+
  
   
 /* section 基础设置 */
@@ -300,13 +317,14 @@ section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center;  /* 垂直居中 */
   padding-bottom: 40px;
 }
 
+/* 让 about 真·居中，不再往下推 */
 #about {
   text-align: center;
-  padding-top: 80px;
+  padding-top: 0;           /* ✅ 把 80px 去掉 */
 }
 
 /* 每一段的文字宽度都控制在一个范围内 */

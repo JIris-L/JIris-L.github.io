@@ -167,7 +167,7 @@ p {
 .manifesto {
   position: relative;
   text-align: center;
-  margin: 40px auto 32px;
+  margin: 0 auto;          /* ✅ 不要上下外边距 */
   max-width: 680px;
 
   /* 书页块 */
@@ -315,6 +315,7 @@ section {
   display: flex;
   align-items: center;               /* 垂直居中 */
   justify-content: center;           /* 水平居中 */
+  padding: 0;
 }
 
 /* 里面的内容宽度控制一下 */

@@ -293,11 +293,21 @@ p {
 /* section 基础设置 */
 section {
   width: 100%;
-  min-height: 110vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+/* 单独让需要一屏的自己写，比如： */
+#about,
+#works,
+#projects,
+#media,
+#contact {
+  min-height: 100vh;
+}
+
   
 /* 让 about 自己不要再强制 110vh，交给内部块控制 */
 

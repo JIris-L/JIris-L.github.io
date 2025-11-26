@@ -156,21 +156,11 @@ p {
 }
 
 .muted { color: var(--text-muted); }
-/* About 整体标题稍微大一点 */
-/* About 标题靠左 */
-#about h2 {
-  font-size: 26px;
-  letter-spacing: 0.12em;
-  margin-bottom: 8px;
-  text-align: left;
-}
 
-/* “月迷津渡”副标题靠左 */
-#about > .cn {
-  text-align: left;
-  margin-bottom: 28px;
+#about {
+  justify-content: flex-start;
+  padding-top: 90px;
 }
-
 
 /* 上面那对核心句：中 + 英，全部居中 */
 .manifesto {
@@ -232,6 +222,87 @@ p {
 .manifesto .cn {
   margin-top: 12px;
 }
+/* ========== 书页引用感 · Manifesto ========== */
+
+.manifesto,
+.manifesto-sub {
+  position: relative;
+  background: rgba(255, 253, 247, 0.7);   /* 微纸色 */
+  padding: 36px 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.04);
+
+  /* 轻微纸张漂浮感 */
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.06),
+    inset 0 0 0 1px rgba(255,255,255,0.35);
+}
+
+
+/* 左书脊线 */
+.manifesto::before,
+.manifesto-sub::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  bottom: 16px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent),
+    transparent
+  );
+  opacity: 0.35;
+}
+
+/* 右纸页线 */
+.manifesto::after,
+.manifesto-sub::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 16px;
+  bottom: 16px;
+  width: 1px;
+  background: rgba(0,0,0,0.04);
+}
+
+/* 让里面的文字离“书脊”远一点 */
+.manifesto p,
+.manifesto-sub p {
+  padding: 0 10px;
+}
+
+
+/* 微微的纸张纹理（不是图片，只是感觉） */
+.manifesto,
+.manifesto-sub {
+  background-image:
+    linear-gradient(
+      transparent 96%,
+      rgba(0,0,0,0.02) 100%
+    );
+  background-size: 100% 28px;
+}
+
+
+/* 小屏幕适配 */
+@media (max-width: 600px) {
+  .manifesto,
+  .manifesto-sub {
+    padding: 28px 18px;
+  }
+
+  .manifesto::before,
+  .manifesto::after,
+  .manifesto-sub::before,
+  .manifesto-sub::after {
+    display: none;
+  }
+}
+  
   
 /* section 基础设置 */
 section {
@@ -248,6 +319,7 @@ section .cn,
 section p {
   max-width: 520px;
 }
+  
 
 /* 默认隐藏 */
 .reveal {

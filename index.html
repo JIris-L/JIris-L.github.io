@@ -303,6 +303,28 @@ section {
   flex-direction: column;
   justify-content: center;
 }
+  
+/* 让 about 自己不要再强制 110vh，交给内部块控制 */
+#about {
+  min-height: auto;
+  padding-top: 90px;
+  display: block;   /* 不再让它自己用 flex 居中 */
+}
+
+  /* about 里的两个“内层 section” */
+.about-block {
+  min-height: 100vh;                 /* 每块一屏高 */
+  display: flex;
+  align-items: center;               /* 垂直居中 */
+  justify-content: center;           /* 水平居中 */
+}
+
+/* 里面的内容宽度控制一下 */
+.about-block > .manifesto,
+.about-block > .about-intro {
+  max-width: 680px;
+  margin: 0 auto;
+}
 
 /* 每一段的文字宽度都控制在一个范围内 */
 section h2,
@@ -691,29 +713,35 @@ section p {
     <!-- ABOUT -->
 <section id="about" class="reveal">
 
-<div class="manifesto">
-  <p class="en">
-    I build the lives of my characters from fragments, memories, and unspoken words.
-  </p>
-  <p class="cn">
-    我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
-  </p>
-</div>
+  <!-- 第一屏：碎片那一句（书页块） -->
+  <div class="about-block reveal">
+    <div class="manifesto">
+      <p class="en">
+        I build the lives of my characters from fragments, memories, and unspoken words.
+      </p>
+      <p class="cn">
+        我以碎片、记忆与未尽之言，构建他们尚未被记录的生活。
+      </p>
+    </div>
+  </div>
 
- <!-- 下：自我介绍 -->
-  <div class="about-intro reveal">
-    <p class="en">
-      Alongside my creative work, I have experience in event planning, education, 
-      and organisational environments, which inform the way I observe and construct narratives.
-    </p>
+  <!-- 第二屏：自我介绍 -->
+  <div class="about-block reveal">
+    <div class="about-intro">
+      <p class="en">
+        Alongside my creative work, I have experience in event planning, education, 
+        and organisational environments, which inform the way I observe and construct narratives.
+      </p>
 
-    <p class="cn">
-      除此之外，我的实践也延伸至活动策划、教育企业以及金融环境之中，
-      这些经历为我的叙事提供了更多维度与视角。
-    </p>
+      <p class="cn">
+        除此之外，我的实践也延伸至活动策划、教育企业以及金融环境之中，
+        这些经历为我的叙事提供了更多维度与视角。
+      </p>
+    </div>
   </div>
 
 </section>
+
 
 
 

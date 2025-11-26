@@ -120,13 +120,15 @@ a {
 
 
 /* 每段的排版略有不同 */
-#about {
-  text-align: center;
-}
+#about { text-align: center; }
 #works { margin-left: 4%; }
 #projects { margin-left: 8%; }
 #media { margin-left: 4%; }
-#contact { text-align: center; }
+#contact {
+  text-align: center;
+  align-items: center;   /* ✅ 关键在这里 */
+}
+
 
 @media(max-width:800px){
   #works,

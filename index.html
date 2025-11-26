@@ -533,11 +533,70 @@ section p {
   text-decoration-thickness: 1px;
   text-decoration-color: var(--accent);
 }
+/* ========== 顶部下拉隐藏页眉 ========== */
+
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(244, 241, 236, 0.9); /* 跟背景接近的纸感 */
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  z-index: 20;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* 隐藏状态（下滑的时候加上这个类） */
+.top-header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.header-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.site-title-en {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.site-title-cn {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* 让内容往下错一点，避免被页眉挡住 */
+.content-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 100px 24px 80px; /* 原来是 60px，改成 100px */
+}
 
   </style>
 </head>
 
 <body>
+<body>
+
+  <!-- 顶部下拉隐藏的页眉 -->
+  <header class="top-header">
+    <div class="header-inner">
+      <span class="site-title-en">MOONLIT CROSSING</span>
+      <span class="site-title-cn">月迷津渡</span>
+    </div>
+  </header>
 
 <!-- 左侧小图标导航 -->
 <nav class="sidebar">
@@ -569,9 +628,6 @@ section p {
 
     <!-- ABOUT -->
 <section id="about" class="reveal">
-
-  <h2>Moonlit Crossing</h2>
-  <div class="cn">月迷津渡</div>
 
 <div class="manifesto">
   <p class="en">
@@ -948,6 +1004,25 @@ section p {
 
   document.querySelectorAll('.reveal').forEach(el => {
     observer.observe(el);
+  });
+</script>
+  
+<script>
+  let lastScrollY = window.scrollY;
+  const header = document.querySelector('.top-header');
+
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+
+    // 往下滚得比较多时，把页眉藏起来
+    if (current > lastScrollY && current > 80) {
+      header.classList.add('hidden');
+    } else {
+      // 往上滚或者回到顶部时，显示页眉
+      header.classList.remove('hidden');
+    }
+
+    lastScrollY = current;
   });
 </script>
   

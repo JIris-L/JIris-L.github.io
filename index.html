@@ -194,7 +194,7 @@ p {
 }
 
 /* 上面的 ❦ */
-.manifesto .cn::before {
+.manifesto .en::before {
   content: "❦";
   display: block;
   text-align: center;
@@ -205,7 +205,7 @@ p {
 }
 
 /* 下面那条横线 */
-.manifesto .cn::after {
+.manifesto .cn {
   content: "";
   display: block;
   width: 60%;
@@ -217,7 +217,7 @@ p {
 
 
 /* 英文核心句：居中、略小一点点 */
-.manifesto .en {
+.manifesto .en::after {
   display: block;
   margin-top: 10px;
   font-family: "Inter", sans-serif;
@@ -259,8 +259,7 @@ p {
   
 /* ========== 书页引用感 · Manifesto ========== */
 
-.manifesto,
-.manifesto-sub {
+.manifesto {
   position: relative;
   background: rgba(255, 253, 247, 0.7);   /* 微纸色 */
   padding: 36px 28px;
@@ -275,8 +274,7 @@ p {
 
 
 /* 左书脊线 */
-.manifesto::before,
-.manifesto-sub::before {
+.manifesto::before {
   content: "";
   position: absolute;
   left: 14px;
@@ -293,8 +291,7 @@ p {
 }
 
 /* 右纸页线 */
-.manifesto::after,
-.manifesto-sub::after {
+.manifesto::after {
   content: "";
   position: absolute;
   right: 14px;
@@ -305,15 +302,14 @@ p {
 }
 
 /* 让里面的文字离“书脊”远一点 */
-.manifesto p,
-.manifesto-sub p {
+.manifesto p {
   padding: 0 10px;
 }
 
 
 /* 微微的纸张纹理（不是图片，只是感觉） */
 .manifesto,
-.manifesto-sub {
+ {
   background-image:
     linear-gradient(
       transparent 96%,
@@ -325,15 +321,12 @@ p {
 
 /* 小屏幕适配 */
 @media (max-width: 600px) {
-  .manifesto,
-  .manifesto-sub {
+  .manifesto {
     padding: 28px 18px;
   }
 
   .manifesto::before,
-  .manifesto::after,
-  .manifesto-sub::before,
-  .manifesto-sub::after {
+  .manifesto::after {
     display: none;
   }
 }

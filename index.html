@@ -165,11 +165,13 @@ p {
   color: var(--text-muted);
 }
 
-/* section 基础设置：正常从上往下排即可 */
 section {
   width: 100%;
-  padding-bottom: 40px;
+  min-height: 100vh;     /* 每个 section 至少占满一页 */
+  padding-bottom: 40px;  /* 内部底部留白 */
+  margin-bottom: 100vh;  /* 每个 section 之间再隔一整页 */
 }
+
 
 #contact {
   margin-top: 180px;   /* 你可以试 120 / 160 / 200 */

@@ -165,13 +165,11 @@ p {
   color: var(--text-muted);
 }
 
-section {
-  width: 100%;
-  min-height: 100vh;
-  padding-bottom: calc(40px + 50vh);   /* 在内部加半页的空间 */
-  margin-bottom: 0;                     /* 不再用外间距 */
+section::after {
+  content: "";
+  display: block;
+  height: 50vh;
 }
-
 
 #contact {
   margin-top: 180px;   /* 你可以试 120 / 160 / 200 */

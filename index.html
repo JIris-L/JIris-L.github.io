@@ -162,22 +162,30 @@ p {
 
 .muted { color: var(--text-muted); }
 
-
-/* section 基础设置 */
+/* section 基础设置：其他段落正常从上往下排就好 */
 section {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* 垂直居中 */
   padding-bottom: 40px;
 }
 
-/* 让 about 真·居中，不再往下推 */
+/* 只有 about 这一屏占满一屏并垂直居中 */
 #about {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* 垂直居中 */
+  align-items: center;       /* 水平居中 */
   text-align: center;
-  padding-top: 0;           /* ✅ 把 80px 去掉 */
+  padding-top: 0;
 }
+
+/* 每一段的文字宽度都控制在一个范围内 */
+section h2,
+section .cn,
+section p {
+  max-width: 520px;
+}
+
 
 /* 上面那块：中 + 英，书页 + 月亮 */
 .manifesto {
@@ -201,11 +209,6 @@ section {
     rgba(0,0,0,0.02) 100%
   );
   background-size: 100% 28px;
-}
-
-/* 只微调 About 第一屏的书页位置（可选）*/
-#about .about-block:first-of-type .manifesto {
-  margin-top: -16px;   /* 想再往上移就调到 -24 / -32 */
 }
 
 /* 左书脊线 */
@@ -309,30 +312,6 @@ section {
   }
 }
 
- 
-  
-/* section 基础设置 */
-section {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* 垂直居中 */
-  padding-bottom: 40px;
-}
-
-/* 让 about 真·居中，不再往下推 */
-#about {
-  text-align: center;
-  padding-top: 0;           /* ✅ 把 80px 去掉 */
-}
-
-/* 每一段的文字宽度都控制在一个范围内 */
-section h2,
-section .cn,
-section p {
-  max-width: 520px;
-}
   
 
 /* 默认隐藏 */

@@ -110,12 +110,12 @@ a {
   }
 }
 
-/* 内容居中容器 */
 .content-wrapper {
   max-width: 760px;
   margin: 0 auto;
-  padding: 60px 24px 80px;
+  padding: 0 24px 80px;   /* ✅ 去掉 top 的 100px */
 }
+
   
 .content {
   display: flex;
@@ -305,6 +305,14 @@ section {
   padding-top: 90px;
   display: block;   /* 不再让它自己用 flex 居中 */
 }
+#about {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
   /* about 里的两个“内层 section” */
 .about-block {
@@ -676,6 +684,8 @@ section p {
       <span class="site-title-cn">月迷津渡</span>
     </div>
   </header>
+  
+<div style="height:80px;"></div>
 
 <!-- 左侧小图标导航 -->
 <nav class="sidebar">

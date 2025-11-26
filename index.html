@@ -300,19 +300,14 @@ section {
 }
   
 /* 让 about 自己不要再强制 110vh，交给内部块控制 */
-#about {
-  min-height: auto;
-  padding-top: 90px;
-  display: block;   /* 不再让它自己用 flex 居中 */
-}
+
 #about {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;            /* 不需要任何 padding-top */
 }
-
-
 
   /* about 里的两个“内层 section” */
 .about-block {

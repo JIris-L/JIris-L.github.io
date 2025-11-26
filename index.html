@@ -299,41 +299,27 @@ section {
   justify-content: center;
 }
 
-/* 单独让需要一屏的自己写，比如： */
-#about,
-#works,
-#projects,
-#media,
-#contact {
-  min-height: 100vh;
-}
-
-  
-/* 让 about 自己不要再强制 110vh，交给内部块控制 */
-
 #about {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;            /* 不需要任何 padding-top */
+  padding: 0;
+  margin: 0;
+  display: block;        /* ✅ 不用 flex，让里面的 about-block 自己来 */
 }
 
   /* about 里的两个“内层 section” */
 .about-block {
-  min-height: 100vh;                 /* 每块一屏高 */
+  min-height: calc(100vh - 60px);   /* 60px 是顶部 header 高度，不想减也可以先写 100vh 试试 */
   display: flex;
-  align-items: center;               /* 垂直居中 */
-  justify-content: center;           /* 水平居中 */
-  padding: 0;
+  align-items: center;              /* 垂直居中 */
+  justify-content: center;          /* 水平居中 */
 }
 
-/* 里面的内容宽度控制一下 */
+/* 里面真正那一块内容的宽度控制一下 */
 .about-block > .manifesto,
 .about-block > .about-intro {
   max-width: 680px;
   margin: 0 auto;
 }
+
 
 /* 每一段的文字宽度都控制在一个范围内 */
 section h2,

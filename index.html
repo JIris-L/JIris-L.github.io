@@ -11,9 +11,9 @@
   <style>
     :root{
       --bg:#0f0f10;                 /* 舞台黑 */
-      --silver:#cfd2d6;             /* 银色题词 */
+      --silver:#cfd2d6;             /* 银色主句 */
       --silver-dim: rgba(207,210,214,.72);
-      --accent:#c28e6a;             /* 点亮色（你站点的金棕） */
+      --accent:#c28e6a;
 
       /* 幕帘 */
       --curtainA: rgba(18,18,18,.92);
@@ -35,12 +35,10 @@
     .stage{
       height:100vh;
       position:relative;
-      display:grid;
-      place-items:center;
       isolation:isolate;
     }
 
-    /* 两个 hover/点击区域（覆盖左右半屏） */
+    /* 左右 hover/点击区域（半屏） */
     .zones{
       position:absolute;
       inset:0;
@@ -50,7 +48,6 @@
     }
     .zone{
       position:relative;
-      cursor:pointer;
       outline:none;
     }
     .zone a{
@@ -59,7 +56,7 @@
       text-decoration:none;
     }
 
-    /* 幕帘在左右两侧，不挡中间 */
+    /* 幕帘在两侧，不遮中间 */
     .curtains{
       position:absolute;
       inset:0;
@@ -93,9 +90,12 @@
       border-left: 1px solid rgba(255,255,255,.06);
     }
 
-    /* 中央题词：永远在上层 */
+    /* ✅ 中央题词：独立于 zones，绝对居中，不受任何布局影响 */
     .center{
-      position:relative;
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%, -50%);
       z-index:5;
       width:min(820px, 92vw);
       text-align:center;
@@ -130,17 +130,14 @@
       text-transform: uppercase;
     }
 
-    /* 只给这两个词上色：默认继承银色 */
-    .hl{
-      transition: color .22s ease, text-shadow .22s ease;
-      color: inherit;
-    }
+    /* 高亮词：默认跟句子一样 */
+    .hl{ color: inherit; transition: color .22s ease; }
 
-    /* 右侧 ABOUT：默认隐藏，hover 右侧才出现 */
+    /* 右侧 ABOUT：默认隐藏，hover 右边才出现 */
     .about-pop{
       position:absolute;
       left:50%;
-      top: 62vh;
+      top: 64%;
       transform: translateX(-50%);
       z-index:6;
       pointer-events:none;
@@ -150,6 +147,7 @@
       letter-spacing:.22em;
       text-transform: uppercase;
       font-size: 13px;
+      text-align:center;
     }
     .about-pop span{
       display:block;
@@ -160,7 +158,7 @@
       color: rgba(207,210,214,.52);
     }
 
-    /* ====== 左侧 hover：点亮 temptation/诱惑 + 左帘微开且变暖 ====== */
+    /* ===== 左侧 hover：左帘变暖+微开，temptation/诱惑“消失” ===== */
     .zone-left:hover ~ .curtains .curtain.left,
     .zone-left:focus-visible ~ .curtains .curtain.left{
       transform: translateX(-34px);
@@ -170,15 +168,15 @@
       filter:saturate(1.06);
     }
 
+    /* ✅ 变成背景色：看起来像被抹掉/消失 */
     .zone-left:hover ~ .center .hl-en,
     .zone-left:hover ~ .center .hl-cn,
     .zone-left:focus-visible ~ .center .hl-en,
     .zone-left:focus-visible ~ .center .hl-cn{
-      color: var(--accent);
-      text-shadow: 0 0 14px rgba(194,142,106,.28);
+      color: var(--bg);
     }
 
-    /* ====== 右侧 hover：右帘微开且变暖 + 显示 ABOUT ====== */
+    /* ===== 右侧 hover：右帘变暖+微开，出现 ABOUT ===== */
     .zone-right:hover ~ .curtains .curtain.right,
     .zone-right:focus-visible ~ .curtains .curtain.right{
       transform: translateX(34px);
@@ -195,18 +193,11 @@
       color: var(--accent);
     }
 
-    /* 小屏适配 */
     @media (max-width: 700px){
       .quote{ font-size:18px; }
       .quote-cn{ font-size:16px; }
       .curtain{ width: 38vw; }
-      .about-pop{ top: 66vh; }
-    }
-
-    /* 触屏无 hover：直接让 ABOUT 常显一点点 */
-    @media (hover: none){
-      .about-pop{ opacity:.85; color: rgba(207,210,214,.72); }
-      .zone a{ pointer-events:auto; }
+      .about-pop{ top: 68%; }
     }
   </style>
 </head>
@@ -214,12 +205,11 @@
 <body>
   <main class="stage">
 
-    <!-- 左右点击/hover 区域：注意顺序，方便用 ~ 选择器控制后面的元素 -->
+    <!-- 左右点击/hover 区域 -->
     <nav class="zones" aria-label="Entry doors">
       <div class="zone zone-left" tabindex="0" aria-label="Temptation / 诱惑">
         <a href="about.html#works" aria-label="Go to works"></a>
       </div>
-
       <div class="zone zone-right" tabindex="0" aria-label="About / 关于">
         <a href="about.html" aria-label="Go to about"></a>
       </div>
@@ -230,24 +220,24 @@
         <div class="curtain right"></div>
       </div>
 
-      <!-- 中央题词（永远可见） -->
-      <section class="center" aria-label="Quote">
-        <div class="quote">
-          “I can resist everything except <span class="hl hl-en">temptation</span>.”
-        </div>
-        <div class="quote-cn">
-          “除了<span class="hl hl-cn">诱惑</span>，我什么都能抗拒。”
-        </div>
-        <div class="author">— OSCAR WILDE</div>
-        <div class="choose">Choose your door.</div>
-      </section>
-
       <!-- 右侧 hover 才出现的 ABOUT -->
       <div class="about-pop" aria-hidden="true">
         ABOUT
         <span>关于</span>
       </div>
     </nav>
+
+    <!-- 中央题词：独立居中 -->
+    <section class="center" aria-label="Quote">
+      <div class="quote">
+        “I can resist everything except <span class="hl hl-en">temptation</span>.”
+      </div>
+      <div class="quote-cn">
+        “除了<span class="hl hl-cn">诱惑</span>，我什么都能抗拒。”
+      </div>
+      <div class="author">— OSCAR WILDE</div>
+      <div class="choose">Choose your door.</div>
+    </section>
 
   </main>
 </body>

@@ -5,6 +5,11 @@
   <title>月迷津渡 · Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- ✅ Favicon（如果你的文件名是 favion.png，就把 favicon 改成 favion） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap" rel="stylesheet">
 
@@ -20,6 +25,7 @@
       --curtainB: rgba(18,18,18,.84);
       --curtainHoverA: rgba(62,42,30,.86);
       --curtainHoverB: rgba(35,24,18,.80);
+
       --fold: rgba(255,255,255,.06);
       --shadow: rgba(0,0,0,.28);
     }
@@ -38,59 +44,7 @@
       isolation:isolate;
     }
 
-    /* 左右 hover/点击区域（半屏） */
-    .zones{
-      position:absolute;
-      inset:0;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      z-index:4;
-    }
-    .zone{
-      position:relative;
-      outline:none;
-    }
-    .zone a{
-      position:absolute;
-      inset:0;
-      text-decoration:none;
-    }
-
-    /* 幕帘在两侧，不遮中间 */
-    .curtains{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      pointer-events:none;
-    }
-    .curtain{
-      position:absolute;
-      top:0; bottom:0;
-      width: 34vw;
-      max-width: 520px;
-      min-width: 220px;
-      box-shadow: 0 20px 80px var(--shadow);
-      transition: transform .42s cubic-bezier(.2,.8,.2,1), background .35s ease, filter .35s ease;
-      filter:saturate(1);
-    }
-    .curtain.left{
-      left:0;
-      transform: translateX(10px);
-      background:
-        repeating-linear-gradient(to right, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
-        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
-      border-right: 1px solid rgba(255,255,255,.06);
-    }
-    .curtain.right{
-      right:0;
-      transform: translateX(-10px);
-      background:
-        repeating-linear-gradient(to left, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
-        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
-      border-left: 1px solid rgba(255,255,255,.06);
-    }
-
-    /* ✅ 中央题词：独立于 zones，绝对居中，不受任何布局影响 */
+    /* ===== 中央题词：永远绝对居中 ===== */
     .center{
       position:absolute;
       left:50%;
@@ -99,9 +53,9 @@
       z-index:5;
       width:min(820px, 92vw);
       text-align:center;
-      color: var(--silver);
       pointer-events:none;
     }
+
     .quote{
       font-family:"Libre Caslon Text", serif;
       font-size:22px;
@@ -130,10 +84,71 @@
       text-transform: uppercase;
     }
 
-    /* 高亮词：默认跟句子一样 */
-    .hl{ color: inherit; transition: color .22s ease; }
+    /* 被控制的词 */
+    .hl{
+      color: inherit;
+      transition: color .22s ease, opacity .22s ease;
+    }
 
-    /* 右侧 ABOUT：默认隐藏，hover 右边才出现 */
+    /* ===== 左右点击/hover 区域（半屏） ===== */
+    .zones{
+      position:absolute;
+      inset:0;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      z-index:4;
+    }
+
+    .zone{
+      position:relative;
+      outline:none;
+    }
+
+    .zone a{
+      position:absolute;
+      inset:0;
+      text-decoration:none;
+      /* 让可点击区域存在，但不遮挡中间文字（中间文字 pointer-events:none） */
+    }
+
+    /* ===== 幕帘：固定在两侧，不遮中间 ===== */
+    .curtains{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    .curtain{
+      position:absolute;
+      top:0; bottom:0;
+      width: 34vw;
+      max-width: 520px;
+      min-width: 220px;
+      box-shadow: 0 20px 80px var(--shadow);
+      transition: transform .42s cubic-bezier(.2,.8,.2,1), background .35s ease, filter .35s ease;
+      filter:saturate(1);
+    }
+
+    .curtain.left{
+      left:0;
+      transform: translateX(10px);
+      background:
+        repeating-linear-gradient(to right, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
+        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+
+    .curtain.right{
+      right:0;
+      transform: translateX(-10px);
+      background:
+        repeating-linear-gradient(to left, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
+        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
+      border-left: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* ===== 右侧 hover 出现的 ABOUT 文案（不挪动中间句子） ===== */
     .about-pop{
       position:absolute;
       left:50%;
@@ -158,9 +173,13 @@
       color: rgba(207,210,214,.52);
     }
 
-    /* ===== 左侧 hover：左帘变暖+微开，temptation/诱惑“消失” ===== */
-    .zone-left:hover ~ .curtains .curtain.left,
-    .zone-left:focus-visible ~ .curtains .curtain.left{
+    /* =========================================
+       ✅ 关键：用 :has() 让父级感知 hover（必生效）
+       ========================================= */
+
+    /* 左侧 hover：左帘微开+变暖 */
+    .stage:has(.zone-left:hover) .curtain.left,
+    .stage:has(.zone-left:focus-visible) .curtain.left{
       transform: translateX(-34px);
       background:
         repeating-linear-gradient(to right, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
@@ -168,17 +187,18 @@
       filter:saturate(1.06);
     }
 
-    /* ✅ 变成背景色：看起来像被抹掉/消失 */
-    .zone-left:hover ~ .center .hl-en,
-    .zone-left:hover ~ .center .hl-cn,
-    .zone-left:focus-visible ~ .center .hl-en,
-    .zone-left:focus-visible ~ .center .hl-cn{
+    /* 左侧 hover：temptation/诱惑 变成背景色（像消失） */
+    .stage:has(.zone-left:hover) .hl-en,
+    .stage:has(.zone-left:hover) .hl-cn,
+    .stage:has(.zone-left:focus-visible) .hl-en,
+    .stage:has(.zone-left:focus-visible) .hl-cn{
       color: var(--bg);
+      opacity: 1;
     }
 
-    /* ===== 右侧 hover：右帘变暖+微开，出现 ABOUT ===== */
-    .zone-right:hover ~ .curtains .curtain.right,
-    .zone-right:focus-visible ~ .curtains .curtain.right{
+    /* 右侧 hover：右帘微开+变暖 */
+    .stage:has(.zone-right:hover) .curtain.right,
+    .stage:has(.zone-right:focus-visible) .curtain.right{
       transform: translateX(34px);
       background:
         repeating-linear-gradient(to left, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
@@ -186,18 +206,27 @@
       filter:saturate(1.06);
     }
 
-    .zone-right:hover ~ .about-pop,
-    .zone-right:focus-visible ~ .about-pop{
+    /* 右侧 hover：显示 ABOUT */
+    .stage:has(.zone-right:hover) .about-pop,
+    .stage:has(.zone-right:focus-visible) .about-pop{
       opacity:1;
       transform: translateX(-50%) translateY(-2px);
       color: var(--accent);
     }
 
+    /* 小屏适配 */
     @media (max-width: 700px){
       .quote{ font-size:18px; }
       .quote-cn{ font-size:16px; }
       .curtain{ width: 38vw; }
       .about-pop{ top: 68%; }
+    }
+
+    /* 触屏设备没有 hover：让 ABOUT 常显一点点，帘轻微打开 */
+    @media (hover: none){
+      .about-pop{ opacity:.85; }
+      .curtain.left{ transform: translateX(-18px); }
+      .curtain.right{ transform: translateX(18px); }
     }
   </style>
 </head>
@@ -205,29 +234,24 @@
 <body>
   <main class="stage">
 
-    <!-- 左右点击/hover 区域 -->
+    <!-- 点击/hover 区域 -->
     <nav class="zones" aria-label="Entry doors">
       <div class="zone zone-left" tabindex="0" aria-label="Temptation / 诱惑">
         <a href="about.html#works" aria-label="Go to works"></a>
       </div>
+
       <div class="zone zone-right" tabindex="0" aria-label="About / 关于">
         <a href="about.html" aria-label="Go to about"></a>
       </div>
-
-      <!-- 幕帘 -->
-      <div class="curtains" aria-hidden="true">
-        <div class="curtain left"></div>
-        <div class="curtain right"></div>
-      </div>
-
-      <!-- 右侧 hover 才出现的 ABOUT -->
-      <div class="about-pop" aria-hidden="true">
-        ABOUT
-        <span>关于</span>
-      </div>
     </nav>
 
-    <!-- 中央题词：独立居中 -->
+    <!-- 幕帘 -->
+    <div class="curtains" aria-hidden="true">
+      <div class="curtain left"></div>
+      <div class="curtain right"></div>
+    </div>
+
+    <!-- 中央题词 -->
     <section class="center" aria-label="Quote">
       <div class="quote">
         “I can resist everything except <span class="hl hl-en">temptation</span>.”
@@ -238,6 +262,12 @@
       <div class="author">— OSCAR WILDE</div>
       <div class="choose">Choose your door.</div>
     </section>
+
+    <!-- 右侧 hover 才出现 -->
+    <div class="about-pop" aria-hidden="true">
+      ABOUT
+      <span>关于</span>
+    </div>
 
   </main>
 </body>

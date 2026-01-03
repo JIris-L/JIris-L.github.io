@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>月迷津渡 · Entry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --text: #1f1f1f;
+      --muted: #777;
+      --accent: #c28e6a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .entry {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .quote {
+      font-family: "Libre Caslon Text", serif;
+      font-size: 22px;
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .quote-cn {
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 20px;
+      line-height: 2;
+      letter-spacing: 0.06em;
+    }
+
+    .author {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+    }
+
+    .choices {
+      margin-top: 48px;
+      display: flex;
+      gap: 40px;
+    }
+
+    .entry-link {
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .entry-link:hover {
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 520px) {
+      .quote {
+        font-size: 18px;
+      }
+      .quote-cn {
+        font-size: 16px;
+      }
+      .choices {
+        gap: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="entry">
+    <div class="quote">
+      “I can resist everything except temptation.”
+    </div>
+    <div class="quote-cn">
+      “除了诱惑，我什么都能抗拒。”
+    </div>
+    <div class="author">
+      — OSCAR WILDE
+    </div>
+
+    <div class="choices">
+      <a class="entry-link" href="about.html#works">诱惑</a>
+      <a class="entry-link" href="about.html">关于</a>
+    </div>
+  </main>
+
+</body>
+</html>

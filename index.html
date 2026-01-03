@@ -10,27 +10,25 @@
 
   <style>
     :root{
-      --bg:#f4f1ec;
-      --text:#1f1f1f;
-      --muted:#777;
-      --accent:#c28e6a;
+      --bg:#0f0f10;                 /* 舞台黑 */
+      --silver:#cfd2d6;             /* 银色题词 */
+      --silver-dim: rgba(207,210,214,.72);
+      --accent:#c28e6a;             /* 点亮色（你站点的金棕） */
 
-      /* 幕帘默认色（深）与 hover 色（更暖/更亮一点） */
-      --curtainA: rgba(20,20,20,.92);
-      --curtainB: rgba(20,20,20,.84);
+      /* 幕帘 */
+      --curtainA: rgba(18,18,18,.92);
+      --curtainB: rgba(18,18,18,.84);
       --curtainHoverA: rgba(62,42,30,.86);
       --curtainHoverB: rgba(35,24,18,.80);
-
-      --fold: rgba(255,255,255,.055);
-      --shadow: rgba(0,0,0,.18);
+      --fold: rgba(255,255,255,.06);
+      --shadow: rgba(0,0,0,.28);
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
     html,body{ height:100%; }
     body{
       background: var(--bg);
-      color: var(--text);
-      font-family: "Inter","PingFang SC","Microsoft YaHei",sans-serif;
+      font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif;
       overflow:hidden;
     }
 
@@ -39,187 +37,176 @@
       position:relative;
       display:grid;
       place-items:center;
-      padding:24px;
       isolation:isolate;
     }
 
-    /* 中央题词：永远在最上层 */
+    /* 两个 hover/点击区域（覆盖左右半屏） */
+    .zones{
+      position:absolute;
+      inset:0;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      z-index:4;
+    }
+    .zone{
+      position:relative;
+      cursor:pointer;
+      outline:none;
+    }
+    .zone a{
+      position:absolute;
+      inset:0;
+      text-decoration:none;
+    }
+
+    /* 幕帘在左右两侧，不挡中间 */
+    .curtains{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+    }
+    .curtain{
+      position:absolute;
+      top:0; bottom:0;
+      width: 34vw;
+      max-width: 520px;
+      min-width: 220px;
+      box-shadow: 0 20px 80px var(--shadow);
+      transition: transform .42s cubic-bezier(.2,.8,.2,1), background .35s ease, filter .35s ease;
+      filter:saturate(1);
+    }
+    .curtain.left{
+      left:0;
+      transform: translateX(10px);
+      background:
+        repeating-linear-gradient(to right, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
+        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+    .curtain.right{
+      right:0;
+      transform: translateX(-10px);
+      background:
+        repeating-linear-gradient(to left, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
+        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
+      border-left: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* 中央题词：永远在上层 */
     .center{
       position:relative;
       z-index:5;
       width:min(820px, 92vw);
       text-align:center;
-      pointer-events:none; /* 不挡鼠标悬停 */
+      color: var(--silver);
+      pointer-events:none;
     }
-
     .quote{
       font-family:"Libre Caslon Text", serif;
       font-size:22px;
       line-height:1.9;
       margin-bottom:10px;
+      color: var(--silver);
     }
     .quote-cn{
       font-family:"Songti SC","STSong","SimSun",serif;
       font-size:20px;
       line-height:2;
       letter-spacing:.06em;
+      color: var(--silver-dim);
     }
     .author{
       margin-top:14px;
       font-size:12px;
-      color:var(--muted);
       letter-spacing:.18em;
+      color: rgba(207,210,214,.55);
     }
-
-    /* 两侧交互区域（不可见） */
-    .zones{
-      position:absolute;
-      inset:0;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      z-index:4;
-    }
-    .zone{
-      position:relative;
-      display:flex;
-      justify-content:center;
-      align-items:flex-end;
-      padding-bottom: 12vh; /* 入口文字位置：中间偏下 */
-      text-decoration:none;
-      outline:none;
-    }
-
-    /* 左右入口文字 */
-    .door-label{
-      text-align:center;
-      letter-spacing:.22em;
-      color:var(--muted);
-      transition: color .22s ease, transform .22s ease;
-      transform: translateY(2px);
-      user-select:none;
-    }
-    .door-label .en{
-      display:block;
-      font-family:"Libre Caslon Text", serif;
-      font-size:16px;
+    .choose{
+      margin-top:26px;
+      font-size:12px;
       letter-spacing:.16em;
-      margin-bottom:8px;
-      transition: color .22s ease;
-    }
-    .door-label .cn{
-      display:block;
-      font-size:13px;
-      letter-spacing:.18em;
-      transition: color .22s ease;
+      color: rgba(207,210,214,.55);
+      text-transform: uppercase;
     }
 
-    /* 悬停左/右区域：文字变色 */
-    .zone:hover .door-label .en,
-    .zone:hover .door-label .cn,
-    .zone:focus-visible .door-label .en,
-    .zone:focus-visible .door-label .cn{
-      color: var(--accent);
-    }
-    .zone:hover .door-label,
-    .zone:focus-visible .door-label{
-      transform: translateY(0);
+    /* 只给这两个词上色：默认继承银色 */
+    .hl{
+      transition: color .22s ease, text-shadow .22s ease;
+      color: inherit;
     }
 
-    /* ====== 幕帘：固定在两侧，不遮中间 ====== */
-    .curtains{
+    /* 右侧 ABOUT：默认隐藏，hover 右侧才出现 */
+    .about-pop{
       position:absolute;
-      inset:0;
-      z-index:2;
-      pointer-events:none; /* 幕帘不吃 hover，让 zone 接管 hover */
-    }
-
-    .curtain{
-      position:absolute;
-      top:0; bottom:0;
-      width: 34vw;              /* 两侧帘宽：可调 30vw-38vw */
-      max-width: 520px;         /* 防止超宽屏太大 */
-      min-width: 220px;         /* 防止太窄 */
-      background:
-        repeating-linear-gradient(
-          to right,
-          var(--fold) 0px,
-          rgba(255,255,255,0) 12px,
-          rgba(255,255,255,0) 26px
-        ),
-        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
-      box-shadow: 0 20px 70px var(--shadow);
-      transition: transform .38s cubic-bezier(.2,.8,.2,1), filter .38s ease, background .38s ease;
-      filter: saturate(1);
-    }
-
-    .curtain.left{
-      left:0;
-      /* 帘子默认稍微往中间压一点，像“合拢” */
-      transform: translateX(10px);
-      border-right: 1px solid rgba(255,255,255,.06);
-    }
-
-    .curtain.right{
-      right:0;
-      transform: translateX(-10px);
-      border-left: 1px solid rgba(255,255,255,.06);
-      /* 褶皱方向反一下更像真实左右帘 */
-      background:
-        repeating-linear-gradient(
-          to left,
-          var(--fold) 0px,
-          rgba(255,255,255,0) 12px,
-          rgba(255,255,255,0) 26px
-        ),
-        linear-gradient(to bottom, var(--curtainA), var(--curtainB));
-    }
-
-    /* 中央舞台开口的“暗边” */
-    .proscenium{
-      position:absolute;
-      inset:0;
-      z-index:1;
+      left:50%;
+      top: 62vh;
+      transform: translateX(-50%);
+      z-index:6;
       pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(0,0,0,0.10), transparent 55%);
-      opacity:.55;
+      opacity:0;
+      transition: opacity .22s ease, transform .22s ease, color .22s ease;
+      color: rgba(207,210,214,.70);
+      letter-spacing:.22em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    .about-pop span{
+      display:block;
+      margin-top:8px;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:none;
+      color: rgba(207,210,214,.52);
     }
 
-    /* hover 左区域：左帘变色 + 略往外拉开 */
+    /* ====== 左侧 hover：点亮 temptation/诱惑 + 左帘微开且变暖 ====== */
     .zone-left:hover ~ .curtains .curtain.left,
     .zone-left:focus-visible ~ .curtains .curtain.left{
       transform: translateX(-34px);
       background:
         repeating-linear-gradient(to right, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
         linear-gradient(to bottom, var(--curtainHoverA), var(--curtainHoverB));
-      filter: saturate(1.06);
+      filter:saturate(1.06);
     }
 
-    /* hover 右区域：右帘变色 + 略往外拉开 */
+    .zone-left:hover ~ .center .hl-en,
+    .zone-left:hover ~ .center .hl-cn,
+    .zone-left:focus-visible ~ .center .hl-en,
+    .zone-left:focus-visible ~ .center .hl-cn{
+      color: var(--accent);
+      text-shadow: 0 0 14px rgba(194,142,106,.28);
+    }
+
+    /* ====== 右侧 hover：右帘微开且变暖 + 显示 ABOUT ====== */
     .zone-right:hover ~ .curtains .curtain.right,
     .zone-right:focus-visible ~ .curtains .curtain.right{
       transform: translateX(34px);
       background:
         repeating-linear-gradient(to left, var(--fold) 0px, rgba(255,255,255,0) 12px, rgba(255,255,255,0) 26px),
         linear-gradient(to bottom, var(--curtainHoverA), var(--curtainHoverB));
-      filter: saturate(1.06);
+      filter:saturate(1.06);
     }
 
-    /* 小屏：字号收一点，帘宽略收 */
+    .zone-right:hover ~ .about-pop,
+    .zone-right:focus-visible ~ .about-pop{
+      opacity:1;
+      transform: translateX(-50%) translateY(-2px);
+      color: var(--accent);
+    }
+
+    /* 小屏适配 */
     @media (max-width: 700px){
       .quote{ font-size:18px; }
       .quote-cn{ font-size:16px; }
       .curtain{ width: 38vw; }
-      .door-label .en{ font-size:14px; }
-      .door-label .cn{ font-size:12px; }
-      .zone{ padding-bottom: 10vh; }
+      .about-pop{ top: 66vh; }
     }
 
-    /* 触屏无 hover：至少让文字始终可读 */
+    /* 触屏无 hover：直接让 ABOUT 常显一点点 */
     @media (hover: none){
-      .door-label .en, .door-label .cn{ color: var(--accent); }
-      .curtain.left{ transform: translateX(-18px); }
-      .curtain.right{ transform: translateX(18px); }
+      .about-pop{ opacity:.85; color: rgba(207,210,214,.72); }
+      .zone a{ pointer-events:auto; }
     }
   </style>
 </head>
@@ -227,41 +214,40 @@
 <body>
   <main class="stage">
 
-    <!-- 中央题词：永远可见 -->
-    <section class="center" aria-label="Quote">
-      <div class="quote">“I can resist everything except temptation.”</div>
-      <div class="quote-cn">“除了诱惑，我什么都能抗拒。”</div>
-      <div class="author">— OSCAR WILDE</div>
-    </section>
-
-    <!-- 两个 hover/点击区域（覆盖左右半屏） -->
+    <!-- 左右点击/hover 区域：注意顺序，方便用 ~ 选择器控制后面的元素 -->
     <nav class="zones" aria-label="Entry doors">
-      <a class="zone zone-left" href="about.html#works" aria-label="Temptation / 诱惑">
-        <div class="door-label">
-          <span class="en">TEMPTATION</span>
-          <span class="cn">诱惑</span>
-        </div>
-      </a>
+      <div class="zone zone-left" tabindex="0" aria-label="Temptation / 诱惑">
+        <a href="about.html#works" aria-label="Go to works"></a>
+      </div>
 
-      <a class="zone zone-right" href="about.html" aria-label="About / 关于">
-        <div class="door-label">
-          <span class="en">ABOUT</span>
-          <span class="cn">关于</span>
-        </div>
-      </a>
+      <div class="zone zone-right" tabindex="0" aria-label="About / 关于">
+        <a href="about.html" aria-label="Go to about"></a>
+      </div>
 
-      <!-- 幕帘（放在 zones 后面，靠 sibling 选择器触发） -->
+      <!-- 幕帘 -->
       <div class="curtains" aria-hidden="true">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
       </div>
 
-      <div class="proscenium" aria-hidden="true"></div>
-    </nav>
+      <!-- 中央题词（永远可见） -->
+      <section class="center" aria-label="Quote">
+        <div class="quote">
+          “I can resist everything except <span class="hl hl-en">temptation</span>.”
+        </div>
+        <div class="quote-cn">
+          “除了<span class="hl hl-cn">诱惑</span>，我什么都能抗拒。”
+        </div>
+        <div class="author">— OSCAR WILDE</div>
+        <div class="choose">Choose your door.</div>
+      </section>
 
-  </main>
-</body>
-</html>
+      <!-- 右侧 hover 才出现的 ABOUT -->
+      <div class="about-pop" aria-hidden="true">
+        ABOUT
+        <span>关于</span>
+      </div>
+    </nav>
 
   </main>
 </body>
